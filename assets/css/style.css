@@ -1,1 +1,74 @@
+/* Body */
 
+body {
+    background-color: white;
+    font-family: "Quicksand", sans-serif;
+    color: black;
+    text-align: center;
+}
+
+/* Heading */
+
+.heading {
+    text-align: center;
+    font-size: 2.5rem;
+}
+
+.logo {
+    height: 40px;
+}
+
+/* Game Area */
+.game-area {
+    background-color: green;
+}
+
+.control-area {
+    background-color: red;
+}
+
+.score-area {
+    background-color: burlywood;
+}
+
+/* Buttons */
+
+.btn {
+    width: 220px;
+    height: 60px;
+    font-family: "Quicksand", sans-serif;
+    text-transform: uppercase;
+    color: white;
+}
+
+.btn-con {
+    padding-top: 10px;
+    border-radius: 50%;
+    background-color: white;
+    border: 10px solid;
+}
+
+.btn-yellow {
+    border-color: yellow;
+    color: yellow;
+}
+
+.btn-red {
+    border-color: red;
+    color: red;
+}
+
+.btn-blue {
+    border-color: blue;
+    color: blue;
+}
+
+.btn-green {
+    border-color: green;
+    color: green;
+}
+
+.btn-black {
+    border-color: black;
+    color: black;
+}
