@@ -5,6 +5,8 @@ body {
     font-family: "Quicksand", sans-serif;
     color: black;
     text-align: center;
+    /* Overide */
+    margin: 0%;
 }
 
 /* Heading */
@@ -20,32 +22,48 @@ body {
 
 /* Game Area */
 .game-area {
-    background-color: green;
+    background: url(../images/casinobg.png) no-repeat;
+    width: 100%;
+    height: 55vh;
 }
 
 .control-area {
-    background-color: red;
+    background-color: transparent;
+    display: grid;
+    grid-template-columns: 25% 25%;
+    justify-content: space-between;
+    row-gap: 10px;
 }
 
 .score-area {
-    background-color: burlywood;
+    background: url(../images/wood.png) no-repeat;
+    width: 100%;
+    height: 30vh;
+    padding-top: 20px;
 }
 
 /* Buttons */
 
 .btn {
-    width: 220px;
-    height: 60px;
     font-family: "Quicksand", sans-serif;
     text-transform: uppercase;
     color: white;
 }
 
 .btn-con {
-    padding-top: 10px;
-    border-radius: 50%;
+    width: 75px;
+    height: 65px;
+    border-radius: 30%;
     background-color: white;
-    border: 10px solid;
+    border: 5px solid;
+}
+
+.btn-chip {
+    width: 55px;
+    height: 55px;
+    border-radius: 100%;
+    background-color: white;
+    border: 5px solid;
 }
 
 .btn-yellow {
