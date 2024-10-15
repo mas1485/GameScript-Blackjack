@@ -5,6 +5,15 @@
     box-sizing: border-box;
 }
 
+/* Generic Style */
+h1 , h2 , h3 , h4 , h5 , p , ul , li , a {
+    color: whitesmoke;
+}
+
+a {
+    text-decoration: none;
+}
+
 /* Body */
 
 body {
@@ -20,16 +29,20 @@ body {
     background: black;
     display: block;
     position: absolute;
-    left: 10px;
-    top: 10px;
     text-decoration: none;
     font-size: 24px;
+}
+
+a#home {
+    padding: 0;
+    left: 20px;
+    top: 10px;
 }
 
 .heading {
     background: black;
     text-align: center;
-    height: 60px;
+    height: 62px;
     display: flex;
     align-content: center;
     justify-content: center;
@@ -60,6 +73,10 @@ body {
     text-decoration: none;
     font-size: 24px;
     display: block;
+}
+
+.topnav a .fa {
+    font-size: 30px;
 }
   
 .topnav a.icon {
@@ -112,7 +129,7 @@ body {
 .dropdown-content {
     display: none;
     position: relative;
-    width: 100%;
+    width: 0%;
     left: 0;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
@@ -128,6 +145,7 @@ body {
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {
     display: block;
+    width: 100%;
 }
 
 /* Create three equal columns that floats next to each other */
@@ -219,4 +237,88 @@ body {
 .btn-black {
     border-color: black;
     color: black;
+}
+
+/* Footer */
+footer {
+    background-color: #2f2f31;
+    flex-basis: content;
+}
+
+footer h4 {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+footer ul {
+    list-style-type: none;
+}
+
+footer li {
+    border-bottom: 5px solid transparent;
+}
+
+#footersocial {
+    display: grid;
+    justify-items: center;
+    padding-top: 10px;
+}
+
+.footertext {
+    font-size: 14px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    margin-top: 10px;
+}
+
+.social-networks {
+    text-align: center;
+    padding: 20px 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    column-gap: 20px;
+    justify-content: space-evenly;
+    justify-items: center;
+    list-style-type: none;
+}
+
+.social-networks i {
+    font-size: xxx-large;
+    color: whitesmoke;
+    transition-property: background-color;
+    transition-duration: 0.75s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+}
+
+.facebook:hover {
+    color: #1a0dab;
+    background-color: whitesmoke;
+    border-radius: 50%;
+    border-width: 5px 5px;
+}
+
+.x:hover {
+    color: #1d9bf0;
+    background-color: whitesmoke;
+    border-radius: 50%;
+    border-width: 5px 5px;
+}
+
+.youtube:hover {
+    background-color: #ff0000;
+    color: whitesmoke;
+    border-radius: 50%;
+    border-width: 5px 5px;
+}
+
+.instagram:hover {
+    color: #ff8820;
+    background-color: whitesmoke;
+    border-radius: 50%;
+    border-width: 5px 5px;
 }
