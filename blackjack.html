@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Document</title>
+</head>
+<body>
+    <header class="topnav">
+        <h1 href="index.html" id="home">
+            <img class="logo" src="assets/images/gamescript.png" alt="Blackjack logo">
+        </h1>
+        <h1 class="heading">
+            <img class="logo" src="assets/images/2063584.png" alt="Blackjack logo">Blackjack
+        </h1>
+        <!-- Hidden Navlinks -->
+        <nav>
+            <ul id="menu">
+                <li><a href="index.html">GameScript</a></li>
+                <li><a href="blackjack.html" class="active">Blackjack</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <!-- Burger Menu -->
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+            <i class="fa fa-bars"></i>
+        </a>
+    </header>
+    <div class="game-area">
+        <span id="dealer">Dealer Cards</span>
+        <span id="pot">Pot</span>
+        <div class="control-area">
+            <button class="btn btn-con btn-black">hit</button>
+            <button class="btn btn-con btn-black">double</button>
+            <button class="btn btn-con btn-black">stand</button>
+            <button class="btn btn-con btn-black">split</button>
+            
+        </div>
+        <span id="player">Player Cards</span>
+    </div>
+
+    <div class="score-area">
+        <button class="btn btn-chip btn-yellow">10</button>
+        <button class="btn btn-chip btn-red">50</button>
+        <button class="btn btn-chip btn-blue">100</button>
+        <button class="btn btn-chip btn-green">500</button>
+        <button class="btn btn-chip btn-black">1000</button>
+    </div>
+    
+    <script src="assets/js/script.js"></script>
+</body>
+</html>
