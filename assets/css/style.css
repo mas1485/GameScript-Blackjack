@@ -269,7 +269,6 @@ footer li {
     display: flex;
     align-items: flex-start;
     justify-content: space-evenly;
-    margin-top: 10px;
 }
 
 .social-networks {
