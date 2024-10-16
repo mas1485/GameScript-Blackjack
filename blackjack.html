@@ -24,7 +24,7 @@
                 <li><a href="index.html">GameScript</a></li>
                 <li><a href="contact.html">Contact</a></li>
                 <div class="dropdown">
-                    <button class="dropbtn">Games
+                    <button class="dropbtn"><h2>Games</h2>
                         <i class="fa fa-caret-down"></i>
                     </button>
                     <div class="dropdown-content">
@@ -43,7 +43,7 @@
     <main>
         <div class="game-area">
             <span id="dealer">Dealer Cards</span>
-            <span id="pot">Pot</span>
+            <span id="pot">0</span>
             <div class="control-area">
                 <button class="btn btn-con btn-black">hit</button>
                 <button class="btn btn-con btn-black">double</button>
@@ -53,13 +53,17 @@
             </div>
             <span id="player">Player Cards</span>
         </div>
-
         <div class="score-area">
-            <button class="btn btn-chip btn-yellow">10</button>
-            <button class="btn btn-chip btn-red">50</button>
-            <button class="btn btn-chip btn-blue">100</button>
-            <button class="btn btn-chip btn-green">500</button>
-            <button class="btn btn-chip btn-black">1000</button>
+            <div>
+                <button class="btn btn-chip btn-yellow">10</button>
+                <button class="btn btn-chip btn-red">50</button>
+                <button class="btn btn-chip btn-blue">100</button>
+                <button class="btn btn-chip btn-green">500</button>
+                <button class="btn btn-chip btn-black">1000</button>
+            </div>
+            <div>
+                <span id="score">1000</span>
+            </div>
         </div>
     </main>
     <!-- Footer -->
