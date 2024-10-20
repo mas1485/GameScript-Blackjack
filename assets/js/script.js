@@ -6,8 +6,11 @@ document.addEventListener("DOMContentLoaded", function() {
     let buttons = document.getElementsByTagName("button");
     for (let button of buttons) {
         button.addEventListener("click", function() {
-            if (this.getAttribute("data-type") === "submit") {
-                checkAnswer();
+            if (this.getAttribute("data-type") === "hit") {
+                hit(playerHand);
+                dealCards(playerHand, 'player');
+                let playerScore = getHandValue(playerHand);
+                console.log (playerScore);
             }
         });
     }
@@ -43,30 +46,20 @@ function burgerChip() {
  */
 function runGame(gameType) {
 
-    var newDeck = [...deck] ;
+    deck = [...resetDeck];
 
-    var card1 = getCardFromDeck(newDeck) ;
-    newDeck = removeCardFromDeck(newDeck , card1) ;
+    hit(playerHand);
+    hit(playerHand);
 
-    var card2 = getCardFromDeck(newDeck) ;
-    newDeck = removeCardFromDeck(newDeck , card2) ;
-    playerHand.push (card1, card2);
-    getHandValue(playerHand);
-
-    var card3 = getCardFromDeck(newDeck) ;
-    newDeck = removeCardFromDeck(newDeck , card3) ;
-
-    var card4 = getCardFromDeck(newDeck) ;
-    newDeck = removeCardFromDeck(newDeck , card4) ;
-    dealerHand.push (card3, card4);
-    getHandValue(dealerHand);
+    hit(dealerHand);
+    hit(dealerHand);
 
     if (gameType === "blackjack") {
-        dealCards(card1, card2, card3, card4);
+        dealCards(playerHand, 'player');
+        dealCards(dealerHand, 'dealer');
     } else {
         alert (`Unknown game type: ${gameType}`);
-        alert (`Unknown game type: ${gameType}`);
-    }
+    } 
 }
 
 /**
@@ -80,37 +73,50 @@ function getCardFromDeck(deck) {
 /**
  * Removes from deck
  */
-function removeCardFromDeck(deck , cardToRemove) {
+function removeCardFromDeck(deck, cardToRemove) {
     deck = deck.filter((card) => card.id !== cardToRemove.id);
     return deck;
 }
 
 /**
- * Sums the players hand
+ * Sums the hand
  */
 function getHandValue(hand) {
-    var sum = 0;
+    let sum = 0;
     for (let i = 0 ; i < hand.length ; i++) {
         sum = sum + hand[i].value;
     }
-    console.log(sum);
+    return sum;
+}
+
+function hit (hand) {
+    let cardHit = getCardFromDeck(deck);
+    deck = removeCardFromDeck(deck, cardHit);
+    hand.push (cardHit);
 }
 
 /**
  * Deals cards and inputs into html
  */
-function dealCards(card1, card2, card3, card4) {
-    document.getElementById('operand1').innerHTML = card1.name + " of " + card1.suit;
-    document.getElementById('operand2').innerHTML = card2.name + " of " + card2.suit;
-    document.getElementById('operand3').innerHTML = card3.name + " of " + card3.suit;
-    document.getElementById('operand4').innerHTML = card4.name + " of " + card4.suit;
+function dealCards(hand, idString) {
+    let htmlHand = "";
+    for (let i = 0 ; i < hand.length ; i++) {
+        var cardName = hand[i].name + " of " + hand[i].suit;
+        var htmlValue = '<span>' + cardName + '</span> ';
+        htmlHand = htmlHand + htmlValue;
+    }
+    document.getElementById(idString).innerHTML = htmlHand;
 }
+
+const sum = [];
 
 const playerHand = [];
 
 const dealerHand = [];
 
-const deck = [
+let deck = [];
+
+const resetDeck = [
     {
         suit: "hearts",
         name: "ace",
