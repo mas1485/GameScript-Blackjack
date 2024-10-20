@@ -504,6 +504,9 @@ function dealCards(hand, idString) {
     document.getElementById(idString).innerHTML = htmlHand;
 }
 
+/**
+ * checks player score and alerts player when bust
+ */
 function checkPlayerScore () {
     let playerScore = getHandValue(playerHand);
     if (playerScore > 21) {
@@ -513,6 +516,9 @@ function checkPlayerScore () {
     }
 }
 
+/**
+ * checks dealer score and alerts player if dealer bust
+ */
 function checkDealerScore () {
     let dealerScore = getHandValue(dealerHand);
     if (dealerScore > 21) {
@@ -522,6 +528,9 @@ function checkDealerScore () {
     }
 }
 
+/**
+ * plays the dealers turn
+ */
 function playDealerTurn () {
     dealerTurn = true;
     while (dealerTurn) {
@@ -540,7 +549,7 @@ function playDealerTurn () {
             // dealer will stand to draw/win
             dealerStand();
         }
-        
+
         checkDealerScore();
     }
 }
