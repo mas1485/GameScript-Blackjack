@@ -1,113 +1,3 @@
-
-/**
- * Wait for dom to load before starting game 
- */
-document.addEventListener("DOMContentLoaded", function() {
-    let buttons = document.getElementsByTagName("button");
-    for (let button of buttons) {
-        button.addEventListener("click", function() {
-            if (this.getAttribute("data-type") === "hit") {
-                hit(playerHand);
-                dealCards(playerHand, 'player');
-                let playerScore = getHandValue(playerHand);
-                console.log (playerScore);
-            }
-        });
-    }
-    runGame("blackjack");
-})
-
-/**
- * Toggle between showing and hiding the navigation menu links when the user clicks on the hamburger menu or bar icon
- */
-function burgerNav() {
-    var x = document.getElementById("menu");
-    if (x.style.display === "block") {
-        x.style.display = "none";
-    } else {
-        x.style.display = "block";
-    }
-}
-
-/**
- * Burger icon for player to see balance and use chips to bet
- */
-function burgerChip() {
-    var x = document.getElementById("menu");
-    if (x.style.display === "block") {
-        x.style.display = "none";
-    } else {
-        x.style.display = "block";
-    }
-}
-
-/**
- * runs blackjack game with two cards dealt to player and two cards dealt to dealer
- */
-function runGame(gameType) {
-
-    deck = [...resetDeck];
-
-    hit(playerHand);
-    hit(playerHand);
-
-    hit(dealerHand);
-    hit(dealerHand);
-
-    if (gameType === "blackjack") {
-        dealCards(playerHand, 'player');
-        dealCards(dealerHand, 'dealer');
-    } else {
-        alert (`Unknown game type: ${gameType}`);
-    } 
-}
-
-/**
- * Gets card from deck
- */
-function getCardFromDeck(deck) {
-    var newCard = deck[Math.floor(Math.random() * deck.length)];
-    return newCard;
-}
-
-/**
- * Removes from deck
- */
-function removeCardFromDeck(deck, cardToRemove) {
-    deck = deck.filter((card) => card.id !== cardToRemove.id);
-    return deck;
-}
-
-/**
- * Sums the hand
- */
-function getHandValue(hand) {
-    let sum = 0;
-    for (let i = 0 ; i < hand.length ; i++) {
-        sum = sum + hand[i].value;
-    }
-    return sum;
-}
-
-function hit (hand) {
-    let cardHit = getCardFromDeck(deck);
-    deck = removeCardFromDeck(deck, cardHit);
-    hand.push (cardHit);
-}
-
-/**
- * Deals cards and inputs into html
- */
-function dealCards(hand, idString) {
-    let htmlHand = "";
-    for (let i = 0 ; i < hand.length ; i++) {
-        var cardName = hand[i].name + " of " + hand[i].suit;
-        var htmlValue = '<span>' + cardName + '</span> ';
-        htmlHand = htmlHand + htmlValue;
-    }
-    document.getElementById(idString).innerHTML = htmlHand;
-}
-
 const sum = [];
 
 const playerHand = [];
@@ -481,3 +371,176 @@ const resetDeck = [
         id: "52"
     },
 ]
+
+let playerTurn = true;
+let dealerTurn = false;
+
+/**
+ * Wait for dom to load before starting game 
+ */
+document.addEventListener("DOMContentLoaded", function() {
+    let buttons = document.getElementsByTagName("button");
+    for (let button of buttons) {
+        button.addEventListener("click", function() {
+            if (this.getAttribute("data-type") === "hit" && playerTurn) {
+                hit(playerHand);
+                dealCards(playerHand, 'player');
+                checkPlayerScore();
+            }
+            if (this.getAttribute("data-type") === "stand" && playerTurn) {
+                playerStand();
+            }
+        });
+    }
+    runGame("blackjack");
+})
+
+/**
+ * Toggle between showing and hiding the navigation menu links when the user clicks on the hamburger menu or bar icon
+ */
+function burgerNav() {
+    var x = document.getElementById("menu");
+    if (x.style.display === "block") {
+        x.style.display = "none";
+    } else {
+        x.style.display = "block";
+    }
+}
+
+/**
+ * Burger icon for player to see balance and use chips to bet
+ */
+function burgerChip() {
+    var x = document.getElementById("menu");
+    if (x.style.display === "block") {
+        x.style.display = "none";
+    } else {
+        x.style.display = "block";
+    }
+}
+
+/**
+ * runs blackjack game with two cards dealt to player and two cards dealt to dealer
+ */
+function runGame(gameType) {
+
+    deck = [...resetDeck];
+
+    hit(playerHand);
+    hit(playerHand);
+
+    hit(dealerHand);
+    hit(dealerHand);
+
+    if (gameType === "blackjack") {
+        dealCards(playerHand, 'player');
+        dealCards(dealerHand, 'dealer');
+    } else {
+        alert (`Unknown game type: ${gameType}`);
+    } 
+}
+
+/**
+ * Gets card from deck
+ */
+function getCardFromDeck(deck) {
+    var newCard = deck[Math.floor(Math.random() * deck.length)];
+    return newCard;
+}
+
+/**
+ * Removes from deck
+ */
+function removeCardFromDeck(deck, cardToRemove) {
+    deck = deck.filter((card) => card.id !== cardToRemove.id);
+    return deck;
+}
+
+/**
+ * Sums the hand
+ */
+function getHandValue(hand) {
+    let sum = 0;
+    for (let i = 0 ; i < hand.length ; i++) {
+        sum += hand[i].value;
+    }
+    return sum;
+}
+
+/**
+ * adds card to the hand
+ */
+function hit (hand) {
+    let cardHit = getCardFromDeck(deck);
+    deck = removeCardFromDeck(deck, cardHit);
+    hand.push (cardHit);
+}
+
+/**
+ * ends the player turn and initiates dealer turn
+ */
+function playerStand () {
+    playerTurn = false;
+    playDealerTurn();
+}
+
+/**
+ * ends dealer turn
+ */
+function dealerStand () {
+    dealerTurn = false;
+}
+
+/**
+ * Deals cards and inputs into html
+ */
+function dealCards(hand, idString) {
+    let htmlHand = "";
+    for (let i = 0 ; i < hand.length ; i++) {
+        var cardName = hand[i].name + " of " + hand[i].suit;
+        var htmlValue = `<span>${cardName}</span> `;
+        htmlHand += htmlValue;
+    }
+    document.getElementById(idString).innerHTML = htmlHand;
+}
+
+function checkPlayerScore () {
+    let playerScore = getHandValue(playerHand);
+    if (playerScore > 21) {
+        alert ("Bust!");
+        alert (`You Scored: ${playerScore}`);
+        player = false;
+    }
+}
+
+function checkDealerScore () {
+    let dealerScore = getHandValue(dealerHand);
+    if (dealerScore > 21) {
+        alert ("Dealer Bust!");
+        alert (`Dealer Scored: ${dealerScore}`);
+        dealerTurn = false;
+    }
+}
+
+function playDealerTurn () {
+    dealerTurn = true;
+    while (dealerTurn) {
+        let playerScore = getHandValue(playerHand);
+        let dealerScore = getHandValue(dealerHand);
+                
+        if (dealerScore < playerScore) {
+            // dealer will hit when less than playerScore
+            hit(dealerHand);
+            dealCards(dealerHand, 'dealer');
+        } else if (dealerScore === playerScore && dealerScore <= 15) {
+            // dealer will hit to try and beat player
+            hit(dealerHand);
+            dealCards(dealerHand, 'dealer');
+        } else {
+            // dealer will stand to draw/win
+            dealerStand();
+        }
+        
+        checkDealerScore();
+    }
+}
