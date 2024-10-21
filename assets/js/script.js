@@ -1,10 +1,12 @@
-const sum = [];
+let playerHand = [];
 
-const playerHand = [];
-
-const dealerHand = [];
+let dealerHand = [];
 
 let deck = [];
+
+let pot = [];
+
+let score = 1000;
 
 const resetDeck = [
     {
@@ -372,8 +374,9 @@ const resetDeck = [
     },
 ]
 
-let playerTurn = true;
+let playerTurn = false;
 let dealerTurn = false;
+let betStage = true;
 
 /**
  * Wait for dom to load before starting game 
@@ -390,9 +393,31 @@ document.addEventListener("DOMContentLoaded", function() {
             if (this.getAttribute("data-type") === "stand" && playerTurn) {
                 playerStand();
             }
+            if (this.getAttribute("data-type") === "bet10" && betStage) {
+                placeBet(10);
+            }
+            if (this.getAttribute("data-type") === "bet50" && betStage) {
+                placeBet(50);
+            }
+            if (this.getAttribute("data-type") === "bet100" && betStage) {
+                placeBet(100);
+            }
+            if (this.getAttribute("data-type") === "bet500" && betStage) {
+                placeBet(500);
+            }
+            if (this.getAttribute("data-type") === "bet1000" && betStage) {
+                placeBet(1000);
+            }
+            if (this.getAttribute("data-type") === "lock-bet" && betStage) {
+                runGame("blackjack");
+            }
         });
     }
-    runGame("blackjack");
+
+    toggleBetShow();
+    toggleConHide();
+    updateScore();
+
 })
 
 /**
@@ -423,7 +448,10 @@ function burgerChip() {
  * runs blackjack game with two cards dealt to player and two cards dealt to dealer
  */
 function runGame(gameType) {
-
+    betStage = false;
+    playerTurn = true;
+    toggleBetHide();
+    toggleConShow();
     deck = [...resetDeck];
 
     hit(playerHand);
@@ -513,6 +541,7 @@ function checkPlayerScore () {
         alert ("Bust!");
         alert (`You Scored: ${playerScore}`);
         player = false;
+        playerLost();
     }
 }
 
@@ -525,6 +554,7 @@ function checkDealerScore () {
         alert ("Dealer Bust!");
         alert (`Dealer Scored: ${dealerScore}`);
         dealerTurn = false;
+        playerWon();
     }
 }
 
@@ -533,23 +563,132 @@ function checkDealerScore () {
  */
 function playDealerTurn () {
     dealerTurn = true;
+    let playerScore = getHandValue(playerHand);
+    let dealerScore = getHandValue(dealerHand);
+
     while (dealerTurn) {
-        let playerScore = getHandValue(playerHand);
-        let dealerScore = getHandValue(dealerHand);
+        playerScore = getHandValue(playerHand);
+        dealerScore = getHandValue(dealerHand);
                 
         if (dealerScore < playerScore) {
             // dealer will hit when less than playerScore
             hit(dealerHand);
             dealCards(dealerHand, 'dealer');
+            checkDealerScore();
         } else if (dealerScore === playerScore && dealerScore <= 15) {
             // dealer will hit to try and beat player
             hit(dealerHand);
             dealCards(dealerHand, 'dealer');
+            checkDealerScore();
         } else {
             // dealer will stand to draw/win
             dealerStand();
+            checkDealerScore();
         }
+    }
+    
+    if (dealerScore > playerScore && dealerScore <= 21) {
+        playerLost();
+    } else if (dealerScore === playerScore && dealerScore <=21 ) {
+        draw();
+    } else {
+        playerWon();
+    }
+}
 
-        checkDealerScore();
+function placeBet(chip) {
+    if (score >= chip) {
+        pot.push(chip);
+        let sum = getPotValue();
+        score -= chip;
+        document.getElementById('pot').innerHTML = sum;
+        document.getElementById('score').innerHTML = score;
+    }
+}
+
+function getPotValue() {
+    let sum = 0;
+    for (let i = 0 ; i < pot.length ; i++) {
+        var chipValue = pot[i];
+        sum += chipValue;
+    }
+    return sum;
+}
+
+function resetPot() {
+    document.getElementById('pot').innerHTML = 0;
+}
+
+function updateScore() {
+    document.getElementById('score').innerHTML = score;
+}
+
+function playerWon() {
+    let sum = getPotValue();
+    playerTurn = false;
+    dealerTurn = false;
+    betStage = false;
+    alert ("You Won!");
+    score += sum*2;
+    newGame();
+}
+
+function playerLost() {
+    playerTurn = false;
+    dealerTurn = false;
+    betStage = false;
+    alert ("You Lost!");
+    newGame();
+}
+
+function newGame() {
+    betStage = true;
+    playerTurn = true;
+    playerHand = [];
+    dealerHand = [];
+    deck = [];
+    pot = [];
+    dealCards(playerHand, 'player');
+    dealCards(dealerHand, 'dealer');
+    resetPot();
+    updateScore();
+    toggleBetShow();
+    toggleConHide();
+    placeBet();
+}
+
+function draw() {
+    playerTurn = false;
+    dealerTurn = false;
+    betStage = false;
+    alert ("You Drew!");
+    newGame();
+}
+
+function toggleBetShow() {
+    var div = document.getElementsByClassName('toggle-bet');
+    for (var i = 0; i < div.length; i ++) {
+        div[i].style.visibility = 'visible';
+    }
+}
+
+function toggleConShow() {
+    var div = document.getElementsByClassName('toggle-con');
+    for (var i = 0; i < div.length; i ++) {
+        div[i].style.visibility = 'visible';
+    }
+}
+
+function toggleBetHide() {
+    var div = document.getElementsByClassName('toggle-bet');
+    for (var i = 0; i < div.length; i ++) {
+        div[i].style.visibility = 'hidden';
+    }
+}
+
+function toggleConHide() {
+    var div = document.getElementsByClassName('toggle-con');
+    for (var i = 0; i < div.length; i ++) {
+        div[i].style.visibility = 'hidden';
     }
 }

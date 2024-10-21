@@ -172,7 +172,7 @@ a#home {
 }
 
 /* Game Area */
-.game-area {
+#game-area {
     background: url(../images/casinobg.png) no-repeat center;
     background-size: cover;
     width: 100%;
@@ -182,17 +182,17 @@ a#home {
     justify-content: space-around;
 }
 
-.control-area {
+#control-area {
     background-color: transparent;
-    display: grid;
-    grid-template-columns: 25% 25%;
+    display: flex;
     justify-content: space-between;
     justify-items: center;
+    align-items: center;
     row-gap: 10px;
     padding: 10px;
 }
 
-.score-area {
+#score-area {
     background: url(../images/wood.png) no-repeat center;
     background-size: cover;
     height: 30vh;
@@ -214,6 +214,14 @@ a#home {
 
 /* Buttons */
 
+#toggle-bet {
+
+}
+
+#toggle-con {
+
+}
+
 .btn {
     font-family: "Quicksand", sans-serif;
     text-transform: uppercase;
@@ -234,6 +242,8 @@ a#home {
     border-radius: 100%;
     background-color: white;
     border: 5px solid;
+    border-color: black;
+    color: black;
 }
 
 .btn-yellow {

@@ -41,29 +41,42 @@
         </a>
     </header>
     <main>
-        <div class="game-area">
+        <div id="game-area">
             <div id="dealer">
             </div>
-            <div id="pot">0</span>
-            <div class="control-area">
-                <button data-type="hit" class="btn btn-con btn-black">hit</button>
-                <button data-type="double" class="btn btn-con btn-black">double</button>
-                <button data-type="stand" class="btn btn-con btn-black">stand</button>
-                <button data-type="split" class="btn btn-con btn-black">split</button>
+            <div id="pot-area">
+                <div id="pot">                  
+                </div>
+                <div>
+                    
+                </div>
+            </div>
+            <div id="control-area">
+                <div class="toggle-con">
+                    <button data-type="hit" class="btn btn-con btn-black">hit</button>
+                    <button data-type="stand" class="btn btn-con btn-black">stand</button>
+                </div>
+                <div class="toggle-bet">
+                    <button data-type="lock-bet" class="btn btn-con btn-black">Lock Bet</button>
+                </div>
+                <div class="toggle-con">
+                    <button data-type="double" class="btn btn-con btn-black">double</button>
+                    <button data-type="split" class="btn btn-con btn-black">split</button>
+                </div>
             </div>
             <div id="player">
             </div>
         </div>
-        <div class="score-area">
+        <div id="score-area">
             <div>
-                <button class="btn btn-chip btn-yellow">10</button>
-                <button class="btn btn-chip btn-red">50</button>
-                <button class="btn btn-chip btn-blue">100</button>
-                <button class="btn btn-chip btn-green">500</button>
-                <button class="btn btn-chip btn-black">1000</button>
+                <button data-type="bet10" class="btn btn-chip btn-yellow">10</button>
+                <button data-type="bet50" class="btn btn-chip btn-red">50</button>
+                <button data-type="bet100"  class="btn btn-chip btn-blue">100</button>
+                <button data-type="bet500"  class="btn btn-chip btn-green">500</button>
+                <button data-type="bet1000"  class="btn btn-chip btn-black">1000</button>
             </div>
             <div>
-                <span id="score">1000</span>
+                <span id="score"></span>
             </div>
         </div>
     </main>
