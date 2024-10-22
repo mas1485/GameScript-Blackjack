@@ -6,6 +6,8 @@ let deck = [];
 
 let pot = [];
 
+let splitCard = [];
+
 let score = 1000;
 
 const resetDeck = [
@@ -378,6 +380,7 @@ let playerTurn = false;
 let dealerTurn = false;
 let allowDoubleBet = false;
 let betStage = true;
+let allowSplitGame = false;
 
 /**
  * Wait for dom to load before starting game 
@@ -389,6 +392,8 @@ document.addEventListener("DOMContentLoaded", function() {
             if (this.getAttribute("data-type") === "hit" && playerTurn) {
                 hit(playerHand);
                 allowDoubleBet = false;
+                toggleSplitHide();
+                toggleDoubleHide();
                 toggleBetHide();
                 dealCards(playerHand, 'player');
                 checkPlayerScore();
@@ -397,6 +402,9 @@ document.addEventListener("DOMContentLoaded", function() {
                 allowDoubleBet = false;
                 doubleBet();
                 toggleBetHide();
+            }
+            if (this.getAttribute("data-type") === "split" && playerTurn && allowSplitGame) {
+                splitHand();
             }
             if (this.getAttribute("data-type") === "stand" && playerTurn) {
                 playerStand();
@@ -473,6 +481,13 @@ function runGame(gameType) {
     hit(dealerHand);
     dealCards(playerHand, 'player');
     dealCards(dealerHand, 'dealer');
+    if (playerHand[0].value === playerHand[1].value) {
+        allowSplitGame = true;
+        toggleSplitShow();
+    } else {
+        allowSplitGame = false;
+        toggleSplitHide();
+    }
 }
 
 /**
@@ -505,7 +520,7 @@ function getHandValue(hand) {
 /**
  * adds card to the hand
  */
-function hit (hand) {
+function hit(hand) {
     let cardHit = getCardFromDeck(deck);
     toggleDoubleHide();
     deck = removeCardFromDeck(deck, cardHit);
@@ -526,6 +541,49 @@ function doubleBet() {
 }
 
 /**
+ * splits the hand allowing the player to play twice for the pot
+ */
+function splitHand() {
+    createDiv();
+    allowSplitGame = true;
+    toggleSplitHide();
+    storeSecondCard();
+    removeSecondCard();
+    dealCards(playerHand, 'player');
+    createSplitHand();
+}
+
+/**
+ * creates div for the split hand
+ */
+function createDiv() {
+    const newDiv = document.createElement('div');
+    newDiv.id = 'player-split';
+    document.getElementById("player").appendChild(newDiv);
+}
+
+/**
+ * stores the second card so that the first hand can be set to only have the first card
+ */
+function storeSecondCard() {
+    splitCard.push (playerHand[1]);
+}
+
+/**
+ * removes the second card from the players hand
+ */
+function removeSecondCard() {
+    playerHand.splice(1);
+}
+
+/**
+ * pulls the split card and puts it into the secondary hand
+ */
+function createSplitHand() {
+    dealCards(splitCard, 'player-split');
+}
+
+/**
  * Deals cards and inputs into html
  */
 function dealCards(hand, idString) {
@@ -541,7 +599,7 @@ function dealCards(hand, idString) {
 /**
  * ends the player turn and initiates dealer turn
  */
-function playerStand () {
+function playerStand() {
     playerTurn = false;
     allowDoubleBet = false;
     toggleDoubleHide();
@@ -552,14 +610,14 @@ function playerStand () {
 /**
  * ends dealer turn
  */
-function dealerStand () {
+function dealerStand() {
     dealerTurn = false;
 }
 
 /**
  * checks player score and alerts player when bust
  */
-function checkPlayerScore () {
+function checkPlayerScore() {
     let playerScore = getHandValue(playerHand);
     if (playerScore > 21) {
         alert ("Bust!");
@@ -572,7 +630,7 @@ function checkPlayerScore () {
 /**
  * checks dealer score and alerts player if dealer bust
  */
-function checkDealerScore () {
+function checkDealerScore() {
     let dealerScore = getHandValue(dealerHand);
     if (dealerScore > 21) {
         alert ("Dealer Bust!");
@@ -585,7 +643,7 @@ function checkDealerScore () {
 /**
  * plays the dealers turn
  */
-function playDealerTurn () {
+function playDealerTurn() {
     dealerTurn = true;
     let playerScore = getHandValue(playerHand);
     let dealerScore = getHandValue(dealerHand);
@@ -791,6 +849,26 @@ function toggleDoubleShow() {
  */
 function toggleDoubleHide() {
     var div = document.getElementsByClassName('double');
+    for (var i = 0; i < div.length; i ++) {
+        div[i].style.visibility = 'hidden';
+    }
+}
+
+/**
+ * shows the split button when it can be played
+ */
+function toggleSplitShow() {
+    var div = document.getElementsByClassName('split');
+    for (var i = 0; i < div.length; i ++) {
+        div[i].style.visibility = 'visible';
+    }
+}
+
+/**
+ * hides the split button when it cannot be played
+ */
+function toggleSplitHide() {
+    var div = document.getElementsByClassName('split');
     for (var i = 0; i < div.length; i ++) {
         div[i].style.visibility = 'hidden';
     }
