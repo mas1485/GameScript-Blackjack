@@ -376,6 +376,7 @@ const resetDeck = [
 
 let playerTurn = false;
 let dealerTurn = false;
+let allowDoubleBet = false;
 let betStage = true;
 
 /**
@@ -387,8 +388,15 @@ document.addEventListener("DOMContentLoaded", function() {
         button.addEventListener("click", function() {
             if (this.getAttribute("data-type") === "hit" && playerTurn) {
                 hit(playerHand);
+                allowDoubleBet = false;
+                toggleBetHide();
                 dealCards(playerHand, 'player');
                 checkPlayerScore();
+            }
+            if (this.getAttribute("data-type") === "double" && playerTurn && allowDoubleBet) {
+                allowDoubleBet = false;
+                doubleBet();
+                toggleBetHide();
             }
             if (this.getAttribute("data-type") === "stand" && playerTurn) {
                 playerStand();
@@ -410,6 +418,10 @@ document.addEventListener("DOMContentLoaded", function() {
             }
             if (this.getAttribute("data-type") === "lock-bet" && betStage) {
                 runGame("blackjack");
+                if (score >= pot) {
+                    allowDoubleBet=true;
+                    toggleDoubleShow();
+                }
             }
         });
     }
@@ -450,22 +462,17 @@ function burgerChip() {
 function runGame(gameType) {
     betStage = false;
     playerTurn = true;
+    allowDoubleBet = true;
+    toggleDoubleShow();
     toggleBetHide();
     toggleConShow();
     deck = [...resetDeck];
-
     hit(playerHand);
     hit(playerHand);
-
     hit(dealerHand);
     hit(dealerHand);
-
-    if (gameType === "blackjack") {
-        dealCards(playerHand, 'player');
-        dealCards(dealerHand, 'dealer');
-    } else {
-        alert (`Unknown game type: ${gameType}`);
-    } 
+    dealCards(playerHand, 'player');
+    dealCards(dealerHand, 'dealer');
 }
 
 /**
@@ -500,23 +507,22 @@ function getHandValue(hand) {
  */
 function hit (hand) {
     let cardHit = getCardFromDeck(deck);
+    toggleDoubleHide();
     deck = removeCardFromDeck(deck, cardHit);
     hand.push (cardHit);
 }
 
 /**
- * ends the player turn and initiates dealer turn
+ * doubles the bet placed into the pot
  */
-function playerStand () {
-    playerTurn = false;
-    playDealerTurn();
-}
-
-/**
- * ends dealer turn
- */
-function dealerStand () {
-    dealerTurn = false;
+function doubleBet() {
+    let sum = getPotValue();
+    pot = sum * 2;
+    score -= sum;
+    document.getElementById('pot').innerHTML = pot;
+    document.getElementById('score').innerHTML = score;
+    allowDoubleBet = false;
+    toggleDoubleHide();
 }
 
 /**
@@ -530,6 +536,24 @@ function dealCards(hand, idString) {
         htmlHand += htmlValue;
     }
     document.getElementById(idString).innerHTML = htmlHand;
+}
+
+/**
+ * ends the player turn and initiates dealer turn
+ */
+function playerStand () {
+    playerTurn = false;
+    allowDoubleBet = false;
+    toggleDoubleHide();
+    toggleConHide();
+    playDealerTurn();
+}
+
+/**
+ * ends dealer turn
+ */
+function dealerStand () {
+    dealerTurn = false;
 }
 
 /**
@@ -596,6 +620,9 @@ function playDealerTurn () {
     }
 }
 
+/**
+ * places the chip from the score into the pot and settles the balances
+ */
 function placeBet(chip) {
     if (score >= chip) {
         pot.push(chip);
@@ -606,6 +633,9 @@ function placeBet(chip) {
     }
 }
 
+/**
+ * gets value of the pot for the above function so that the pot is added correctly
+ */
 function getPotValue() {
     let sum = 0;
     for (let i = 0 ; i < pot.length ; i++) {
@@ -615,14 +645,23 @@ function getPotValue() {
     return sum;
 }
 
+/**
+ * resets pot to 0
+ */
 function resetPot() {
     document.getElementById('pot').innerHTML = 0;
 }
 
+/**
+ * updates score sent to html
+ */
 function updateScore() {
     document.getElementById('score').innerHTML = score;
 }
 
+/**
+ * displays player won and awards them value of the pot whilst starting the newgame
+ */
 function playerWon() {
     let sum = getPotValue();
     playerTurn = false;
@@ -633,6 +672,9 @@ function playerWon() {
     newGame();
 }
 
+/**
+ * displays player lost, foregoing the pot and starting the newgame
+ */
 function playerLost() {
     playerTurn = false;
     dealerTurn = false;
@@ -641,9 +683,22 @@ function playerLost() {
     newGame();
 }
 
+/**
+ * displays a draw, running a new game that bypasses the betting stage
+ */
+function draw() {
+    playerTurn = false;
+    dealerTurn = false;
+    betStage = false;
+    alert ("You Drew!");
+    newGameNoBet();
+}
+
+/**
+ * resets all the arrays and clears the stages
+ */
 function newGame() {
     betStage = true;
-    playerTurn = true;
     playerHand = [];
     dealerHand = [];
     deck = [];
@@ -657,14 +712,33 @@ function newGame() {
     placeBet();
 }
 
-function draw() {
-    playerTurn = false;
-    dealerTurn = false;
+/**
+ * plays a new game that bypasses the betting stage but resets the cards
+ */
+function newGameNoBet() {
+    playerHand = [];
+    dealerHand = [];
+    deck = [];
+    dealCards(playerHand, 'player');
+    dealCards(dealerHand, 'dealer');
     betStage = false;
-    alert ("You Drew!");
-    newGame();
+    playerTurn = true;
+    allowDoubleBet = false;
+    toggleBetHide();
+    toggleConShow();
+    toggleDoubleHide();
+    deck = [...resetDeck];
+    hit(playerHand);
+    hit(playerHand);
+    hit(dealerHand);
+    hit(dealerHand);
+    dealCards(playerHand, 'player');
+    dealCards(dealerHand, 'dealer');
 }
 
+/**
+ * toggles the betting button on when the player is in the betting stage
+ */
 function toggleBetShow() {
     var div = document.getElementsByClassName('toggle-bet');
     for (var i = 0; i < div.length; i ++) {
@@ -672,13 +746,9 @@ function toggleBetShow() {
     }
 }
 
-function toggleConShow() {
-    var div = document.getElementsByClassName('toggle-con');
-    for (var i = 0; i < div.length; i ++) {
-        div[i].style.visibility = 'visible';
-    }
-}
-
+/**
+ * toggles the betting button off when the player finishes the betting stage
+ */
 function toggleBetHide() {
     var div = document.getElementsByClassName('toggle-bet');
     for (var i = 0; i < div.length; i ++) {
@@ -686,8 +756,41 @@ function toggleBetHide() {
     }
 }
 
+/**
+ * toggles the control buttons on when it is the player's turn
+ */
+function toggleConShow() {
+    var div = document.getElementsByClassName('toggle-con');
+    for (var i = 0; i < div.length; i ++) {
+        div[i].style.visibility = 'visible';
+    }
+}
+
+/**
+ * toggles the control buttons off when the player ends their turn
+ */
 function toggleConHide() {
     var div = document.getElementsByClassName('toggle-con');
+    for (var i = 0; i < div.length; i ++) {
+        div[i].style.visibility = 'hidden';
+    }
+}
+
+/**
+ * shows the double button when it can be played
+ */
+function toggleDoubleShow() {
+    var div = document.getElementsByClassName('double');
+    for (var i = 0; i < div.length; i ++) {
+        div[i].style.visibility = 'visible';
+    }
+}
+
+/**
+ * hides the double button when it cannot be played
+ */
+function toggleDoubleHide() {
+    var div = document.getElementsByClassName('double');
     for (var i = 0; i < div.length; i ++) {
         div[i].style.visibility = 'hidden';
     }
