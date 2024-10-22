@@ -409,6 +409,14 @@ document.addEventListener("DOMContentLoaded", function() {
             if (this.getAttribute("data-type") === "stand" && playerTurn) {
                 playerStand();
             }
+            if (this.getAttribute("data-type") === "new-game") {
+                newGame();
+                toggleNewGameHide();
+            }
+            if (this.getAttribute("data-type") === "play-again") {
+                newGameNoBet();
+                toggleContinueHide();
+            }
             if (this.getAttribute("data-type") === "bet10" && betStage) {
                 placeBet(10);
             }
@@ -436,6 +444,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
     toggleBetShow();
     toggleConHide();
+    toggleNewGameHide();
+    toggleContinueHide();
     updateScore();
 
 })
@@ -532,7 +542,7 @@ function hit(hand) {
  */
 function doubleBet() {
     let sum = getPotValue();
-    pot = sum * 2;
+    pot = sum*2;
     score -= sum;
     document.getElementById('pot').innerHTML = pot;
     document.getElementById('score').innerHTML = score;
@@ -718,38 +728,41 @@ function updateScore() {
 }
 
 /**
- * displays player won and awards them value of the pot whilst starting the newgame
+ * displays player won, awards them value of the pot before allowing player to reset by playing new game
  */
 function playerWon() {
     let sum = getPotValue();
     playerTurn = false;
     dealerTurn = false;
     betStage = false;
+    allowSplitGame = false;
     alert ("You Won!");
     score += sum*2;
-    newGame();
+    toggleNewGameShow();
 }
 
 /**
- * displays player lost, foregoing the pot and starting the newgame
+ * displays player lost, removes functions before allowing player to reset by playing new game
  */
 function playerLost() {
     playerTurn = false;
     dealerTurn = false;
+    allowSplitGame = false;
     betStage = false;
     alert ("You Lost!");
-    newGame();
+    toggleNewGameShow();
 }
 
 /**
- * displays a draw, running a new game that bypasses the betting stage
+ * displays a draw, removes functions before allowing player to continue to play a new game
  */
 function draw() {
     playerTurn = false;
     dealerTurn = false;
+    allowSplitGame = false;
     betStage = false;
     alert ("You Drew!");
-    newGameNoBet();
+    toggleContinueShow();
 }
 
 /**
@@ -869,6 +882,46 @@ function toggleSplitShow() {
  */
 function toggleSplitHide() {
     var div = document.getElementsByClassName('split');
+    for (var i = 0; i < div.length; i ++) {
+        div[i].style.visibility = 'hidden';
+    }
+}
+
+/**
+ * shows the new game button when it can be played
+ */
+function toggleNewGameShow() {
+    var div = document.getElementsByClassName('new-game');
+    for (var i = 0; i < div.length; i ++) {
+        div[i].style.visibility = 'visible';
+    }
+}
+
+/**
+ * hides the new game button when it cannot be played
+ */
+function toggleNewGameHide() {
+    var div = document.getElementsByClassName('new-game');
+    for (var i = 0; i < div.length; i ++) {
+        div[i].style.visibility = 'hidden';
+    }
+}
+
+/**
+ * shows the continue button when it can be played
+ */
+function toggleContinueShow() {
+    var div = document.getElementsByClassName('play-again');
+    for (var i = 0; i < div.length; i ++) {
+        div[i].style.visibility = 'visible';
+    }
+}
+
+/**
+ * hides the continue button when it cannot be played
+ */
+function toggleContinueHide() {
+    var div = document.getElementsByClassName('play-again');
     for (var i = 0; i < div.length; i ++) {
         div[i].style.visibility = 'hidden';
     }
