@@ -405,9 +405,11 @@ document.addEventListener("DOMContentLoaded", function() {
             }
             if (this.getAttribute("data-type") === "split" && playerTurn && allowSplitGame) {
                 splitHand();
+                toggleSplitHide();
             }
             if (this.getAttribute("data-type") === "stand" && playerTurn) {
                 playerStand();
+                toggleSplitHide();
             }
             if (this.getAttribute("data-type") === "new-game") {
                 newGame();
@@ -556,7 +558,6 @@ function doubleBet() {
 function splitHand() {
     createDiv();
     allowSplitGame = true;
-    toggleSplitHide();
     storeSecondCard();
     removeSecondCard();
     dealCards(playerHand, 'player');
@@ -739,6 +740,7 @@ function playerWon() {
     alert ("You Won!");
     score += sum*2;
     toggleNewGameShow();
+    toggleConHide();
 }
 
 /**
@@ -751,6 +753,7 @@ function playerLost() {
     betStage = false;
     alert ("You Lost!");
     toggleNewGameShow();
+    toggleConHide();
 }
 
 /**
@@ -763,6 +766,7 @@ function draw() {
     betStage = false;
     alert ("You Drew!");
     toggleContinueShow();
+    toggleConHide();
 }
 
 /**
