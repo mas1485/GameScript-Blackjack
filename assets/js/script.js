@@ -530,7 +530,19 @@ function getHandValue(hand) {
     for (let i = 0 ; i < hand.length ; i++) {
         sum += hand[i].value;
     }
+
+    if (sum > 21 && doesHandContainAce(hand)) {
+        sum -= 10;
+    }    
     return sum;
+}
+
+function doesHandContainAce(hand) {
+    for (let i = 0 ; i < hand.length ; i++) {
+        if (hand[i].name === 'ace') {
+            return true;
+        }
+    }
 }
 
 /**
@@ -560,22 +572,12 @@ function doubleBet() {
  * splits the hand allowing the player to play twice for the pot
  */
 function splitPlayerHand() {
-    // createDiv();
     allowSplitGame = true;
     storeSecondCard();
     removeSecondCard();
     dealCards(playerHand, 'player');
     dealCards(splitHand, 'player-split');
 }
-
-// /**
-//  * creates div for the split hand
-//  */
-// function createDiv() {
-//     const newDiv = document.createElement('div');
-//     newDiv.id = 'player-split';
-//     document.getElementById("player").appendChild(newDiv);
-// }
 
 /**
  * stores the second card so that the first hand can be set to only have the first card
@@ -590,13 +592,6 @@ function storeSecondCard() {
 function removeSecondCard() {
     playerHand.splice(1);
 }
-
-// /**
-//  * pulls the split card and puts it into the secondary hand
-//  */
-// function createSplitHand() {
-//     dealCards(splitCard, 'player-split');
-// }
 
 /**
  * Deals cards and inputs into html
