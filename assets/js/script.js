@@ -775,6 +775,7 @@ function draw() {
 function newGame() {
     betStage = true;
     playerHand = [];
+    splitHand = [];
     dealerHand = [];
     deck = [];
     pot = [];
@@ -793,6 +794,7 @@ function newGame() {
  */
 function newGameNoBet() {
     playerHand = [];
+    splitHand = [];
     dealerHand = [];
     deck = [];
     dealCards(playerHand, 'player');
