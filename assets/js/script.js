@@ -444,6 +444,8 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
+    checkPlayerScore();
+    checkDealerScore();
     toggleBetShow();
     toggleConHide();
     toggleNewGameHide();
@@ -783,6 +785,8 @@ function newGame() {
     pot = [];
     dealCards(playerHand, 'player');
     dealCards(dealerHand, 'dealer');
+    checkPlayerScore();
+    checkDealerScore();
     resetPot();
     toggleBetShow();
     toggleConHide();
@@ -798,6 +802,8 @@ function newGameNoBet() {
     deck = [];
     dealCards(playerHand, 'player');
     dealCards(dealerHand, 'dealer');
+    checkPlayerScore();
+    checkDealerScore();
     betStage = false;
     playerTurn = true;
     allowDoubleBet = false;
