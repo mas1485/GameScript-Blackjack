@@ -841,6 +841,7 @@ function newGame() {
     dealCards(playerHand, 'player-split');
     dealCards(dealerHand, 'dealer');
     checkPlayerScore();
+    checkSplitScore();
     checkDealerScore();
     resetPot();
     toggleBetShow();
@@ -861,6 +862,7 @@ function newGameNoBet() {
     dealCards(playerHand, 'player-split');
     dealCards(dealerHand, 'dealer');
     checkPlayerScore();
+    checkSplitScore();
     checkDealerScore();
     betStage = false;
     playerTurn = true;
