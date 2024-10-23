@@ -528,7 +528,7 @@ function removeCardFromDeck(deck, cardToRemove) {
 }
 
 /**
- * Sums the hand
+ * Sums the hand and adds logic if ace is in hand this can be treated as 11 or 1
  */
 function getHandValue(hand) {
     let sum = 0;
@@ -542,6 +542,9 @@ function getHandValue(hand) {
     return sum;
 }
 
+/**
+ * finds out if the hand contains an ace
+ */
 function doesHandContainAce(hand) {
     for (let i = 0 ; i < hand.length ; i++) {
         if (hand[i].name === 'ace') {
