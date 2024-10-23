@@ -6,7 +6,7 @@ let deck = [];
 
 let pot = [];
 
-let splitCard = [];
+let splitHand = [];
 
 let score = 1000;
 
@@ -404,7 +404,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 toggleBetHide();
             }
             if (this.getAttribute("data-type") === "split" && playerTurn && allowSplitGame) {
-                splitHand();
+                splitPlayerHand();
                 toggleSplitHide();
             }
             if (this.getAttribute("data-type") === "stand" && playerTurn) {
@@ -436,7 +436,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }
             if (this.getAttribute("data-type") === "lock-bet" && betStage) {
                 runGame("blackjack");
-                if (score >= pot) {
+                if (score >= getPotValue()) {
                     allowDoubleBet=true;
                     toggleDoubleShow();
                 }
@@ -544,9 +544,9 @@ function hit(hand) {
  */
 function doubleBet() {
     let sum = getPotValue();
-    pot = sum*2;
+    pot.push(sum);
     score -= sum;
-    document.getElementById('pot').innerHTML = pot;
+    document.getElementById('pot').innerHTML = getPotValue();
     document.getElementById('score').innerHTML = score;
     allowDoubleBet = false;
     toggleDoubleHide();
@@ -555,29 +555,29 @@ function doubleBet() {
 /**
  * splits the hand allowing the player to play twice for the pot
  */
-function splitHand() {
-    createDiv();
+function splitPlayerHand() {
+    // createDiv();
     allowSplitGame = true;
     storeSecondCard();
     removeSecondCard();
     dealCards(playerHand, 'player');
-    createSplitHand();
+    dealCards(splitHand, 'player-split');
 }
 
-/**
- * creates div for the split hand
- */
-function createDiv() {
-    const newDiv = document.createElement('div');
-    newDiv.id = 'player-split';
-    document.getElementById("player").appendChild(newDiv);
-}
+// /**
+//  * creates div for the split hand
+//  */
+// function createDiv() {
+//     const newDiv = document.createElement('div');
+//     newDiv.id = 'player-split';
+//     document.getElementById("player").appendChild(newDiv);
+// }
 
 /**
  * stores the second card so that the first hand can be set to only have the first card
  */
 function storeSecondCard() {
-    splitCard.push (playerHand[1]);
+    splitHand.push (playerHand[1]);
 }
 
 /**
@@ -587,12 +587,12 @@ function removeSecondCard() {
     playerHand.splice(1);
 }
 
-/**
- * pulls the split card and puts it into the secondary hand
- */
-function createSplitHand() {
-    dealCards(splitCard, 'player-split');
-}
+// /**
+//  * pulls the split card and puts it into the secondary hand
+//  */
+// function createSplitHand() {
+//     dealCards(splitCard, 'player-split');
+// }
 
 /**
  * Deals cards and inputs into html
@@ -634,7 +634,6 @@ function checkPlayerScore() {
         alert ("Bust!");
         alert (`You Scored: ${playerScore}`);
         player = false;
-        playerLost();
     }
 }
 
@@ -647,7 +646,6 @@ function checkDealerScore() {
         alert ("Dealer Bust!");
         alert (`Dealer Scored: ${dealerScore}`);
         dealerTurn = false;
-        playerWon();
     }
 }
 
@@ -733,12 +731,13 @@ function updateScore() {
  */
 function playerWon() {
     let sum = getPotValue();
+    score += sum*2;
+    document.getElementById('score').innerHTML = score;
     playerTurn = false;
     dealerTurn = false;
     betStage = false;
     allowSplitGame = false;
     alert ("You Won!");
-    score += sum*2;
     toggleNewGameShow();
     toggleConHide();
 }
@@ -781,7 +780,6 @@ function newGame() {
     dealCards(playerHand, 'player');
     dealCards(dealerHand, 'dealer');
     resetPot();
-    updateScore();
     toggleBetShow();
     toggleConHide();
     placeBet();
