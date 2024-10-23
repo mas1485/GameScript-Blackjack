@@ -378,9 +378,11 @@ const resetDeck = [
 
 let playerTurn = false;
 let dealerTurn = false;
-let allowDoubleBet = false;
+let allowDoubleBet = true;
 let betStage = true;
-let allowSplitGame = false;
+let allowSplitGame = true;
+let splitGame = false;
+let useSplitHand = false;
 
 /**
  * Wait for dom to load before starting game 
@@ -391,21 +393,27 @@ document.addEventListener("DOMContentLoaded", function() {
         button.addEventListener("click", function() {
             if (this.getAttribute("data-type") === "hit" && playerTurn) {
                 hit(playerHand);
-                allowDoubleBet = false;
                 toggleSplitHide();
                 toggleDoubleHide();
                 toggleBetHide();
                 dealCards(playerHand, 'player');
                 checkPlayerScore();
             }
+            if (this.getAttribute("data-type") === "split-hit" && playerTurn) {
+                hit(splitHand);
+                dealCards(splitHand, 'player-split');
+                checkSplitScore();
+            }
             if (this.getAttribute("data-type") === "double" && playerTurn && allowDoubleBet) {
-                allowDoubleBet = false;
                 doubleBet();
                 toggleBetHide();
+                toggleSplitHide();
             }
             if (this.getAttribute("data-type") === "split" && playerTurn && allowSplitGame) {
+                doubleBet();
                 splitPlayerHand();
                 toggleSplitHide();
+                toggleSplitConShow();
             }
             if (this.getAttribute("data-type") === "stand" && playerTurn) {
                 playerStand();
@@ -436,8 +444,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }
             if (this.getAttribute("data-type") === "lock-bet" && betStage) {
                 runGame("blackjack");
-                if (score >= getPotValue()) {
-                    allowDoubleBet=true;
+                if (score >= getPotValue() && allowDoubleBet) {
                     toggleDoubleShow();
                 }
             }
@@ -450,6 +457,7 @@ document.addEventListener("DOMContentLoaded", function() {
     toggleConHide();
     toggleNewGameHide();
     toggleContinueHide();
+    toggleSplitConHide();
     updateScore();
 
 })
@@ -484,7 +492,6 @@ function burgerChip() {
 function runGame(gameType) {
     betStage = false;
     playerTurn = true;
-    allowDoubleBet = true;
     toggleDoubleShow();
     toggleBetHide();
     toggleConShow();
@@ -497,11 +504,9 @@ function runGame(gameType) {
     dealCards(dealerHand, 'dealer');
     checkPlayerScore();
     checkDealerScore();
-    if (playerHand[0].value === playerHand[1].value) {
-        allowSplitGame = true;
+    if (playerHand[0].value === playerHand[1].value && allowSplitGame) {
         toggleSplitShow();
     } else {
-        allowSplitGame = false;
         toggleSplitHide();
     }
 }
@@ -564,7 +569,6 @@ function doubleBet() {
     score -= sum;
     document.getElementById('pot').innerHTML = getPotValue();
     document.getElementById('score').innerHTML = score;
-    allowDoubleBet = false;
     toggleDoubleHide();
 }
 
@@ -572,11 +576,17 @@ function doubleBet() {
  * splits the hand allowing the player to play twice for the pot
  */
 function splitPlayerHand() {
-    allowSplitGame = true;
+    allowDoubleBet = false;
+    allowSplitGame = false;
+    splitGame = true;
     storeSecondCard();
     removeSecondCard();
+    hit(playerHand);
+    hit(splitHand);
     dealCards(playerHand, 'player');
     dealCards(splitHand, 'player-split');
+    checkPlayerScore();
+    checkSplitScore();
 }
 
 /**
@@ -611,7 +621,6 @@ function dealCards(hand, idString) {
  */
 function playerStand() {
     playerTurn = false;
-    allowDoubleBet = false;
     toggleDoubleHide();
     toggleConHide();
     playDealerTurn();
@@ -633,6 +642,21 @@ function checkPlayerScore() {
     if (playerScore > 21) {
         alert ("Bust!");
         alert (`You Scored: ${playerScore}`);
+        if (!splitGame) {
+            player = false;
+        }
+    }
+}
+
+/**
+ * checks split player score and alerts player when bust - places sum into tracker
+ */
+function checkSplitScore() {
+    let splitScore = getHandValue(splitHand);
+    document.getElementById('tracker-split').innerHTML = splitScore;
+    if (splitScore > 21) {
+        alert ("Bust!");
+        alert (`You Scored: ${splitScore}`);
         player = false;
     }
 }
@@ -656,36 +680,67 @@ function checkDealerScore() {
 function playDealerTurn() {
     dealerTurn = true;
     let playerScore = getHandValue(playerHand);
+    let splitPlayerScore = getHandValue(splitHand);
     let dealerScore = getHandValue(dealerHand);
 
     while (dealerTurn) {
-        playerScore = getHandValue(playerHand);
-        dealerScore = getHandValue(dealerHand);
-                
-        if (dealerScore < playerScore) {
-            // dealer will hit when less than playerScore
-            hit(dealerHand);
-            dealCards(dealerHand, 'dealer');
-            checkDealerScore();
-        } else if (dealerScore === playerScore && dealerScore <= 15) {
-            // dealer will hit to try and beat player
-            hit(dealerHand);
-            dealCards(dealerHand, 'dealer');
-            checkDealerScore();
-        } else {
-            // dealer will stand to draw/win
-            dealerStand();
-            checkDealerScore();
+        if (!splitGame) {
+            playerScore = getHandValue(playerHand);
+            splitPlayerScore = getHandValue(splitHand);
+            dealerScore = getHandValue(dealerHand);
+
+            if (dealerScore < playerScore && playerScore <= 21) {
+                // dealer will hit when less than playerScore
+                hit(dealerHand);
+                dealCards(dealerHand, 'dealer');
+                checkDealerScore();
+            } else if (dealerScore === playerScore && dealerScore <= 15) {
+                // dealer will hit to try and beat player
+                hit(dealerHand);
+                dealCards(dealerHand, 'dealer');
+                checkDealerScore();
+            } else {
+                // dealer will stand to draw/win
+                dealerStand();
+                checkDealerScore();
+            }
+        } 
+        
+        if (splitGame) {
+            playerScore = getHandValue(playerHand);
+            splitPlayerScore = getHandValue(splitHand);
+            dealerScore = getHandValue(dealerHand);
+
+            if (dealerScore < playerScore && playerScore <= 21 || dealerScore < splitPlayerScore && splitPlayerScore <= 21) {
+                // dealer will hit when less than playerScore
+                hit(dealerHand);
+                dealCards(dealerHand, 'dealer');
+                checkDealerScore();
+            } else if (dealerScore === playerScore && dealerScore === splitPlayerScore && dealerScore <= 15 ) {
+                // dealer will hit to try and beat player
+                hit(dealerHand);
+                dealCards(dealerHand, 'dealer');
+                checkDealerScore();
+            } else {
+                // dealer will stand to draw/win
+                dealerStand();
+                checkDealerScore();
+            }
         }
     }
     
-    if (dealerScore > playerScore && dealerScore <= 21) {
+    if (dealerScore > playerScore && dealerScore <= 21 && !splitGame) {
         playerLost();
-    } else if (dealerScore === playerScore && dealerScore <=21 ) {
+    } else if (dealerScore > playerScore && dealerScore > splitPlayerScore && dealerScore <= 21 && splitGame) {
+        playerLost();
+    } else if (dealerScore === playerScore && dealerScore <=21 && !splitGame) {
+        draw();
+    } else if (dealerScore === playerScore && dealerScore === splitPlayerScore && dealerScore <=21 &&splitGame) {
         draw();
     } else {
         playerWon();
     }
+
 }
 
 /**
@@ -717,6 +772,7 @@ function getPotValue() {
  * resets pot to 0
  */
 function resetPot() {
+    pot = [];
     document.getElementById('pot').innerHTML = 0;
 }
 
@@ -737,10 +793,10 @@ function playerWon() {
     playerTurn = false;
     dealerTurn = false;
     betStage = false;
-    allowSplitGame = false;
     alert ("You Won!");
     toggleNewGameShow();
     toggleConHide();
+    toggleSplitConHide();
 }
 
 /**
@@ -749,11 +805,11 @@ function playerWon() {
 function playerLost() {
     playerTurn = false;
     dealerTurn = false;
-    allowSplitGame = false;
     betStage = false;
     alert ("You Lost!");
     toggleNewGameShow();
     toggleConHide();
+    toggleSplitConHide();
 }
 
 /**
@@ -762,11 +818,11 @@ function playerLost() {
 function draw() {
     playerTurn = false;
     dealerTurn = false;
-    allowSplitGame = false;
     betStage = false;
     alert ("You Drew!");
     toggleContinueShow();
     toggleConHide();
+    toggleSplitConHide();
 }
 
 /**
@@ -774,18 +830,22 @@ function draw() {
  */
 function newGame() {
     betStage = true;
+    allowDoubleBet = true;
+    splitGame = false;
+    useSplitHand = false;
     playerHand = [];
     splitHand = [];
     dealerHand = [];
     deck = [];
-    pot = [];
     dealCards(playerHand, 'player');
+    dealCards(playerHand, 'player-split');
     dealCards(dealerHand, 'dealer');
     checkPlayerScore();
     checkDealerScore();
     resetPot();
     toggleBetShow();
     toggleConHide();
+    toggleSplitConHide();
     placeBet();
 }
 
@@ -798,14 +858,18 @@ function newGameNoBet() {
     dealerHand = [];
     deck = [];
     dealCards(playerHand, 'player');
+    dealCards(playerHand, 'player-split');
     dealCards(dealerHand, 'dealer');
     checkPlayerScore();
     checkDealerScore();
     betStage = false;
     playerTurn = true;
-    allowDoubleBet = false;
+    allowDoubleBet = true;
+    splitGame = false;
+    useSplitHand = false;
     toggleBetHide();
     toggleConShow();
+    toggleSplitConHide();
     toggleDoubleHide();
     deck = [...resetDeck];
     hit(playerHand);
@@ -933,5 +997,25 @@ function toggleContinueHide() {
     var div = document.getElementsByClassName('play-again');
     for (var i = 0; i < div.length; i ++) {
         div[i].style.visibility = 'hidden';
+    }
+}
+
+/**
+ * shows the hit/stand buttons when a split game is played
+ */
+function toggleSplitConShow() {
+    var div = document.getElementsByClassName('toggle-con-split');
+    for (var i = 0; i < div.length; i ++) {
+        div[i].style.display = 'block';
+    }
+}
+
+/**
+ * shows the hit/stand buttons when a split game is played
+ */
+function toggleSplitConHide() {
+    var div = document.getElementsByClassName('toggle-con-split');
+    for (var i = 0; i < div.length; i ++) {
+        div[i].style.display = 'none';
     }
 }
