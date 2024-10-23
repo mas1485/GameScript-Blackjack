@@ -493,6 +493,8 @@ function runGame(gameType) {
     hit(dealerHand);
     dealCards(playerHand, 'player');
     dealCards(dealerHand, 'dealer');
+    checkPlayerScore();
+    checkDealerScore();
     if (playerHand[0].value === playerHand[1].value) {
         allowSplitGame = true;
         toggleSplitShow();
@@ -626,10 +628,11 @@ function dealerStand() {
 }
 
 /**
- * checks player score and alerts player when bust
+ * checks player score and alerts player when bust - places sum into tracker
  */
 function checkPlayerScore() {
     let playerScore = getHandValue(playerHand);
+    document.getElementById('tracker-player').innerHTML = playerScore;
     if (playerScore > 21) {
         alert ("Bust!");
         alert (`You Scored: ${playerScore}`);
@@ -638,10 +641,11 @@ function checkPlayerScore() {
 }
 
 /**
- * checks dealer score and alerts player if dealer bust
+ * checks dealer score and alerts player if dealer bust - places sum into tracker
  */
 function checkDealerScore() {
     let dealerScore = getHandValue(dealerHand);
+    document.getElementById('tracker-dealer').innerHTML = dealerScore;
     if (dealerScore > 21) {
         alert ("Dealer Bust!");
         alert (`Dealer Scored: ${dealerScore}`);
