@@ -8,6 +8,8 @@ let pot = [];
 
 let splitHand = [];
 
+let hiddenCard = [];
+
 let score = 1000;
 
 const resetDeck = [
@@ -500,6 +502,7 @@ function runGame(gameType) {
     hit(playerHand);
     hit(dealerHand);
     hit(dealerHand);
+    hideDealerCard();
     dealCards(playerHand, 'player');
     dealCards(dealerHand, 'dealer');
     checkPlayerScore();
@@ -615,8 +618,24 @@ function dealCards(hand, idString) {
         var cardName = hand[i].name + " of " + hand[i].suit;
         var htmlValue = `<span>${cardName}</span> `;
         htmlHand += htmlValue;
-    }
+    }    
     document.getElementById(idString).innerHTML = htmlHand;
+}
+
+/**
+ * treats the dealer card as if "face-down"
+ */
+function hideDealerCard () {
+    hiddenCard = dealerHand.pop();
+    console.log(hiddenCard);
+}
+
+/**
+ * reveals the "face-down" dealer card
+ */
+function revealDealerCard () {
+    dealerHand.push(hiddenCard);
+    console.log(dealerHand);
 }
 
 /**
@@ -685,6 +704,7 @@ function playDealerTurn() {
     let playerScore = getHandValue(playerHand);
     let splitPlayerScore = getHandValue(splitHand);
     let dealerScore = getHandValue(dealerHand);
+    revealDealerCard();
 
     while (dealerTurn) {
         if (!splitGame) {
