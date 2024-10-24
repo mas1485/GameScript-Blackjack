@@ -472,18 +472,6 @@ function burgerNav() {
 }
 
 /**
- * Burger icon for player to see balance and use chips to bet
- */
-function burgerChip() {
-    var x = document.getElementById("menu");
-    if (x.style.display === "block") {
-        x.style.display = "none";
-    } else {
-        x.style.display = "block";
-    }
-}
-
-/**
  * runs blackjack game with two cards dealt to player and two cards dealt to dealer
  */
 function runGame(gameType) {
