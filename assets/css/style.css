@@ -214,12 +214,12 @@ a#home {
 
 /* Buttons */
 
-#toggle-bet {
-
+.toggle-bet , .toggle-con , .double , .split , .new-game {
+    visibility: hidden;
 }
 
-#toggle-con {
-
+.toggle-con-split {
+    display: none;
 }
 
 .btn {

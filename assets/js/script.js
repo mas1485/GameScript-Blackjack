@@ -425,10 +425,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 newGame();
                 toggleNewGameHide();
             }
-            if (this.getAttribute("data-type") === "play-again") {
-                newGameNoBet();
-                toggleContinueHide();
-            }
             if (this.getAttribute("data-type") === "bet10" && betStage) {
                 placeBet(10);
             }
@@ -458,7 +454,6 @@ document.addEventListener("DOMContentLoaded", function() {
     toggleBetShow();
     toggleConHide();
     toggleNewGameHide();
-    toggleContinueHide();
     toggleSplitConHide();
     updateScore();
 
@@ -839,11 +834,14 @@ function playerLost() {
  * displays a draw, removes functions before allowing player to continue to play a new game
  */
 function draw() {
+    let sum = getPotValue();
+    score += sum;
+    document.getElementById('score').innerHTML = score;
     playerTurn = false;
     dealerTurn = false;
     betStage = false;
     alert ("You Drew!");
-    toggleContinueShow();
+    toggleNewGameShow();
     toggleConHide();
     toggleSplitConHide();
 }
@@ -871,38 +869,6 @@ function newGame() {
     toggleConHide();
     toggleSplitConHide();
     placeBet();
-}
-
-/**
- * plays a new game that bypasses the betting stage but resets the cards
- */
-function newGameNoBet() {
-    playerHand = [];
-    splitHand = [];
-    dealerHand = [];
-    deck = [];
-    dealCards(playerHand, 'player');
-    dealCards(playerHand, 'player-split');
-    dealCards(dealerHand, 'dealer');
-    checkPlayerScore();
-    checkSplitScore();
-    checkDealerScore();
-    betStage = false;
-    playerTurn = true;
-    allowDoubleBet = true;
-    splitGame = false;
-    useSplitHand = false;
-    toggleBetHide();
-    toggleConShow();
-    toggleSplitConHide();
-    toggleDoubleHide();
-    deck = [...resetDeck];
-    hit(playerHand);
-    hit(playerHand);
-    hit(dealerHand);
-    hit(dealerHand);
-    dealCards(playerHand, 'player');
-    dealCards(dealerHand, 'dealer');
 }
 
 /**
@@ -1000,26 +966,6 @@ function toggleNewGameShow() {
  */
 function toggleNewGameHide() {
     var div = document.getElementsByClassName('new-game');
-    for (var i = 0; i < div.length; i ++) {
-        div[i].style.visibility = 'hidden';
-    }
-}
-
-/**
- * shows the continue button when it can be played
- */
-function toggleContinueShow() {
-    var div = document.getElementsByClassName('play-again');
-    for (var i = 0; i < div.length; i ++) {
-        div[i].style.visibility = 'visible';
-    }
-}
-
-/**
- * hides the continue button when it cannot be played
- */
-function toggleContinueHide() {
-    var div = document.getElementsByClassName('play-again');
     for (var i = 0; i < div.length; i ++) {
         div[i].style.visibility = 'hidden';
     }
