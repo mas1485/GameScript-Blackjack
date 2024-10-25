@@ -234,6 +234,10 @@ a#home {
 }
 
 /* Cards */
+#player , #dealer {
+    display: inline-flex;
+}
+
 .card {
     display: flex;
     justify-content: center;
@@ -247,6 +251,16 @@ a#home {
     background-color: white;
     font-size: 28px;
     font-weight: 600;
+    margin-left: -10px;
+    margin-right:-10px;
+    transition: all 0.4s;
+}
+
+.card:hover {
+    margin-left: 15px;
+    margin-right: 15px;
+    transform: translateY(-5px) scale(1.1);
+    z-index:10;
 }
 
 .diamonds , .hearts {

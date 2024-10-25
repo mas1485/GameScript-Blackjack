@@ -659,8 +659,6 @@ function dealCards(hand, idString) {
         htmlHand += htmlValue;
     }
     styleHand = document.getElementById(idString);
-    styleHand.style.display = "inline-flex";
-    styleHand.style.position = "relative";
     document.getElementById(idString).innerHTML = htmlHand;
 }
 
