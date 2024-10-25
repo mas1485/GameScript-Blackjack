@@ -17,6 +17,7 @@ const resetDeck = [
         suit: "hearts",
         name: "ace",
         value: 11,
+        frontend: "A",
         id: "1"
     },
 
@@ -24,6 +25,7 @@ const resetDeck = [
         suit: "hearts",
         name: "two",
         value: 2,
+        frontend: "2",
         id: "2"
     },
 
@@ -31,6 +33,7 @@ const resetDeck = [
         suit: "hearts",
         name: "three",
         value: 3,
+        frontend: "3",
         id: "3"
     },
 
@@ -38,6 +41,7 @@ const resetDeck = [
         suit: "hearts",
         name: "four",
         value: 4,
+        frontend: "4",
         id: "4"
     },
 
@@ -45,6 +49,7 @@ const resetDeck = [
         suit: "hearts",
         name: "five",
         value: 5,
+        frontend: "5",
         id: "5"
     },
 
@@ -52,6 +57,7 @@ const resetDeck = [
         suit: "hearts",
         name: "six",
         value: 6,
+        frontend: "6",
         id: "6"
     },
 
@@ -59,6 +65,7 @@ const resetDeck = [
         suit: "hearts",
         name: "seven",
         value: 7,
+        frontend: "7",
         id: "7"
     },
 
@@ -66,6 +73,7 @@ const resetDeck = [
         suit: "hearts",
         name: "eight",
         value: 8,
+        frontend: "8",
         id: "8"
     },
 
@@ -73,6 +81,7 @@ const resetDeck = [
         suit: "hearts",
         name: "nine",
         value: 9,
+        frontend: "9",
         id: "9"
     },
 
@@ -80,6 +89,7 @@ const resetDeck = [
         suit: "hearts",
         name: "ten",
         value: 10,
+        frontend: "10",
         id: "10"
     },
 
@@ -87,6 +97,7 @@ const resetDeck = [
         suit: "hearts",
         name: "jack",
         value: 10,
+        frontend: "J",
         id: "11"
     },
 
@@ -94,6 +105,7 @@ const resetDeck = [
         suit: "hearts",
         name: "queen",
         value: 10,
+        frontend: "Q",
         id: "12"
     },
 
@@ -101,6 +113,7 @@ const resetDeck = [
         suit: "hearts",
         name: "king",
         value: 10,
+        frontend: "K",
         id: "13"
     },
 
@@ -108,6 +121,7 @@ const resetDeck = [
         suit: "diamonds",
         name: "ace",
         value: 11,
+        frontend: "A",
         id: "14"
     },
 
@@ -115,6 +129,7 @@ const resetDeck = [
         suit: "diamonds",
         name: "two",
         value: 2,
+        frontend: "2",
         id: "15"
     },
 
@@ -122,6 +137,7 @@ const resetDeck = [
         suit: "diamonds",
         name: "three",
         value: 3,
+        frontend: "3",
         id: "16"
     },
 
@@ -129,6 +145,7 @@ const resetDeck = [
         suit: "diamonds",
         name: "four",
         value: 4,
+        frontend: "4",
         id: "17"
     },
 
@@ -136,6 +153,7 @@ const resetDeck = [
         suit: "diamonds",
         name: "five",
         value: 5,
+        frontend: "5",
         id: "18"
     },
 
@@ -143,6 +161,7 @@ const resetDeck = [
         suit: "diamonds",
         name: "six",
         value: 6,
+        frontend: "6",
         id: "19"
     },
 
@@ -150,6 +169,7 @@ const resetDeck = [
         suit: "diamonds",
         name: "seven",
         value: 7,
+        frontend: "7",
         id: "20"
     },
 
@@ -157,6 +177,7 @@ const resetDeck = [
         suit: "diamonds",
         name: "eight",
         value: 8,
+        frontend: "8",
         id: "21"
     },
 
@@ -164,6 +185,7 @@ const resetDeck = [
         suit: "diamonds",
         name: "nine",
         value: 9,
+        frontend: "9",
         id: "22"
     },
 
@@ -171,6 +193,7 @@ const resetDeck = [
         suit: "diamonds",
         name: "ten",
         value: 10,
+        frontend: "10",
         id: "23"
     },
 
@@ -178,6 +201,7 @@ const resetDeck = [
         suit: "diamonds",
         name: "jack",
         value: 10,
+        frontend: "J",
         id: "24"
     },
 
@@ -185,6 +209,7 @@ const resetDeck = [
         suit: "diamonds",
         name: "queen",
         value: 10,
+        frontend: "Q",
         id: "25"
     },
 
@@ -192,6 +217,7 @@ const resetDeck = [
         suit: "diamonds",
         name: "king",
         value: 10,
+        frontend: "K",
         id: "26"
     },
 
@@ -199,6 +225,7 @@ const resetDeck = [
         suit: "spades",
         name: "ace",
         value: 11,
+        frontend: "A",
         id: "27"
     },
 
@@ -206,6 +233,7 @@ const resetDeck = [
         suit: "spades",
         name: "two",
         value: 2,
+        frontend: "2",
         id: "28"
     },
 
@@ -213,6 +241,7 @@ const resetDeck = [
         suit: "spades",
         name: "three",
         value: 3,
+        frontend: "3",
         id: "29"
     },
 
@@ -220,6 +249,7 @@ const resetDeck = [
         suit: "spades",
         name: "four",
         value: 4,
+        frontend: "4",
         id: "30"
     },
 
@@ -227,6 +257,7 @@ const resetDeck = [
         suit: "spades",
         name: "five",
         value: 5,
+        frontend: "5",
         id: "31"
     },
 
@@ -234,6 +265,7 @@ const resetDeck = [
         suit: "spades",
         name: "six",
         value: 6,
+        frontend: "6",
         id: "32"
     },
 
@@ -241,6 +273,7 @@ const resetDeck = [
         suit: "spades",
         name: "seven",
         value: 7,
+        frontend: "7",
         id: "33"
     },
 
@@ -248,6 +281,7 @@ const resetDeck = [
         suit: "spades",
         name: "eight",
         value: 8,
+        frontend: "8",
         id: "34"
     },
 
@@ -255,6 +289,7 @@ const resetDeck = [
         suit: "spades",
         name: "nine",
         value: 9,
+        frontend: "9",
         id: "35"
     },
 
@@ -262,6 +297,7 @@ const resetDeck = [
         suit: "spades",
         name: "ten",
         value: 10,
+        frontend: "10",
         id: "36"
     },
 
@@ -269,6 +305,7 @@ const resetDeck = [
         suit: "spades",
         name: "jack",
         value: 10,
+        frontend: "J",
         id: "37"
     },
 
@@ -276,6 +313,7 @@ const resetDeck = [
         suit: "spades",
         name: "queen",
         value: 10,
+        frontend: "Q",
         id: "38"
     },
 
@@ -283,6 +321,7 @@ const resetDeck = [
         suit: "spades",
         name: "king",
         value: 10,
+        frontend: "K",
         id: "39"
     },
 
@@ -290,6 +329,7 @@ const resetDeck = [
         suit: "clubs",
         name: "ace",
         value: 11,
+        frontend: "A",
         id: "40"
     },
 
@@ -297,6 +337,7 @@ const resetDeck = [
         suit: "clubs",
         name: "two",
         value: 2,
+        frontend: "2",
         id: "41"
     },
 
@@ -304,6 +345,7 @@ const resetDeck = [
         suit: "clubs",
         name: "three",
         value: 3,
+        frontend: "3",
         id: "42"
     },
 
@@ -311,6 +353,7 @@ const resetDeck = [
         suit: "clubs",
         name: "four",
         value: 4,
+        frontend: "4",
         id: "43"
     },
 
@@ -318,6 +361,7 @@ const resetDeck = [
         suit: "clubs",
         name: "five",
         value: 5,
+        frontend: "5",
         id: "44"
     },
 
@@ -325,6 +369,7 @@ const resetDeck = [
         suit: "clubs",
         name: "six",
         value: 6,
+        frontend: "6",
         id: "45"
     },
 
@@ -332,6 +377,7 @@ const resetDeck = [
         suit: "clubs",
         name: "seven",
         value: 7,
+        frontend: "7",
         id: "46"
     },
 
@@ -339,6 +385,7 @@ const resetDeck = [
         suit: "clubs",
         name: "eight",
         value: 8,
+        frontend: "8",
         id: "47"
     },
 
@@ -346,6 +393,7 @@ const resetDeck = [
         suit: "clubs",
         name: "nine",
         value: 9,
+        frontend: "9",
         id: "48"
     },
 
@@ -353,6 +401,7 @@ const resetDeck = [
         suit: "clubs",
         name: "ten",
         value: 10,
+        frontend: "10",
         id: "49"
     },
 
@@ -360,6 +409,7 @@ const resetDeck = [
         suit: "clubs",
         name: "jack",
         value: 10,
+        frontend: "J",
         id: "50"
     },
 
@@ -367,6 +417,7 @@ const resetDeck = [
         suit: "clubs",
         name: "queen",
         value: 10,
+        frontend: "Q",
         id: "51"
     },
 
@@ -374,6 +425,7 @@ const resetDeck = [
         suit: "clubs",
         name: "king",
         value: 10,
+        frontend: "K",
         id: "52"
     },
 ]
@@ -597,16 +649,18 @@ function removeSecondCard() {
     playerHand.splice(1);
 }
 
-/**
- * Deals cards and inputs into html
- */
 function dealCards(hand, idString) {
     let htmlHand = "";
     for (let i = 0 ; i < hand.length ; i++) {
-        var cardName = hand[i].name + " of " + hand[i].suit;
-        var htmlValue = `<span>${cardName}</span> `;
+        var cardName = hand[i].name;
+        var cardSuit = hand[i].suit;
+        var cardFrontend = hand[i].frontend;
+        var htmlValue = `<container class="card ${cardName} ${cardSuit}">${cardFrontend}</container>`;
         htmlHand += htmlValue;
-    }    
+    }
+    styleHand = document.getElementById(idString);
+    styleHand.style.display = "inline-flex";
+    styleHand.style.position = "relative";
     document.getElementById(idString).innerHTML = htmlHand;
 }
 
