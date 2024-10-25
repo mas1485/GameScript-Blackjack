@@ -38,7 +38,7 @@ body {
     font-size: 24px;
 }
 
-a#home {
+div#home {
     padding: 0;
     left: 15px;
     top: 20px;
@@ -62,6 +62,10 @@ a#home {
 
 /* styling navbar top */
 
+#mega-menu {
+    display: block;
+}
+
 .topnav {
     overflow: hidden;
     background-color: #333;
@@ -70,22 +74,23 @@ a#home {
 
 .topnav #menu {
     display: none;
+    flex-direction: column;
 }
 
-.topnav a {
+.topnav div {
     color: silver;
     padding: 15px 15px;
     text-decoration: none;
     font-size: 24px;
-    display: block;
-    transition: 0.5s;
+    display: none;
+    transition: all 0.5s;
 }
 
-.topnav a .fa {
+.topnav div .fa {
     font-size: 40px;
 }
   
-.topnav a.icon {
+.topnav div.icon {
     background: black;
     display: block;
     position: absolute;
@@ -93,13 +98,20 @@ a#home {
     top: 5px;
 }
 
-.topnav a:hover {
+.topnav li {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.topnav div:hover {
     background-color: gray;
     color: black;
+    transition: all 0.5s;
 }
-  
+ 
 .active {
-    background-color: rgb(150, 0, 0);
+    background-color: #04AA6D;
     transition: all 0.5s;
 }
 
@@ -110,6 +122,22 @@ a#home {
 .active-dropdown {
     background-color: #04AA6D;
     color: gray;
+}
+
+.active-dropdown:hover {
+    background-color: rgb(150,0,0);
+}
+
+li {
+    transition: all 0.5s;
+}
+
+li h2 {
+    padding: 15px;
+}
+
+li:hover {
+    background-color: rgb(42, 147, 165);
 }
 
 /* dropdown */
@@ -133,7 +161,7 @@ a#home {
     margin: 0; /* Important for vertical align on mobile phones */
 }
 
-.navbar a:hover, .dropdown:hover .dropbtn {
+.navbar li:hover, .dropdown:hover .dropbtn {
     width: 100%;
 }
 
@@ -157,32 +185,14 @@ a#home {
 
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {
-    display: block;
+    display: flex;
+    flex-direction: column;
     width: 100%;
-    transition: 0.5s;
+    transition: all 0.5s;
 }
 
-.dropdown-content a:hover {
-    background-color: #b530a5;
-}
-
-/* Create three equal columns that floats next to each other */
-.column {
-    float: left;
-    width: 50%;
-    padding: 10px;
-    background-color: #ccc;
-    height: 250px;
-}
-
-/* Style links inside the columns */
-.column a {
-    float: none;
-    color: black;
-    padding: 16px;
-    text-decoration: none;
-    display: block;
-    text-align: left;
+.dropdown-content li:hover {
+    background-color: rgb(42, 147, 165);
 }
 
 /* Game Area */
@@ -200,9 +210,12 @@ a#home {
 #control-area {
     background-color: transparent;
     display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
     justify-content: space-between;
     justify-items: center;
     align-items: center;
+    column-gap: 10px;
     row-gap: 10px;
     padding: 10px;
 }
@@ -233,9 +246,23 @@ a#home {
     position: relative;
 }
 
+.player-area {
+    display: flex;
+}
+
+.toggle-con {
+    display: flex;
+    flex-direction: column;
+}
+
 /* Cards */
-#player , #dealer {
+#player , #dealer , #player-split {
     display: inline-flex;
+    justify-content: space-evenly;
+}
+
+#player , #player-split {
+    width: 100%;
 }
 
 .card {
@@ -284,11 +311,7 @@ a#home {
     position: relative;
 }
 
-.toggle-bet , .toggle-con , .double , .split , .new-game {
-    visibility: hidden;
-}
-
-.toggle-con-split {
+.toggle-bet , toggle-con-split , .toggle-con , .double , .split , .new-game {
     display: none;
 }
 
@@ -307,7 +330,6 @@ a#home {
     font-weight: 600;
     cursor: pointer;
     text-align: center;
-    margin-bottom: 10px;
     transition: background-color 0.5s;
 }
 
@@ -426,7 +448,7 @@ footer li {
 }
 
 .social-networks i {
-    font-size: xxx-large;
+    font-size: 40px;
     color: whitesmoke;
     transition-property: background-color;
     transition-duration: 0.75s;

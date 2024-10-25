@@ -435,6 +435,7 @@ let dealerTurn = false;
 let allowDoubleBet = true;
 let betStage = true;
 let allowSplitGame = true;
+let firstHand = true;
 let splitGame = false;
 let useSplitHand = false;
 
@@ -442,6 +443,12 @@ let useSplitHand = false;
  * Wait for dom to load before starting game 
  */
 document.addEventListener("DOMContentLoaded", function() {
+    let burgerIcon = document.getElementById("mega-menu");
+    console.log(burgerIcon);
+    burgerIcon.addEventListener("click", function() {
+        console.log("buttonpress");
+        burgerNav();
+    });
     let buttons = document.getElementsByTagName("button");
     for (let button of buttons) {
         button.addEventListener("click", function() {
@@ -466,8 +473,9 @@ document.addEventListener("DOMContentLoaded", function() {
             if (this.getAttribute("data-type") === "split" && playerTurn && allowSplitGame) {
                 doubleBet();
                 splitPlayerHand();
-                toggleSplitHide();
                 toggleSplitConShow();
+                toggleSplitHide();
+                toggleSplitNone();
             }
             if (this.getAttribute("data-type") === "stand" && playerTurn) {
                 playerStand();
@@ -507,6 +515,7 @@ document.addEventListener("DOMContentLoaded", function() {
     toggleConHide();
     toggleNewGameHide();
     toggleSplitConHide();
+    toggleSplitRevert();
     updateScore();
 
 })
@@ -516,10 +525,10 @@ document.addEventListener("DOMContentLoaded", function() {
  */
 function burgerNav() {
     var x = document.getElementById("menu");
-    if (x.style.display === "block") {
+    if (x.style.display === "flex") {
         x.style.display = "none";
     } else {
-        x.style.display = "block";
+        x.style.display = "flex";
     }
 }
 
@@ -703,7 +712,10 @@ function checkPlayerScore() {
         alert ("Bust!");
         alert (`You Scored: ${playerScore}`);
         if (!splitGame) {
-            player = false;
+            playerLost();
+        } else {
+            firstHand = false;
+            checkSplitScore();
         }
     }
 }
@@ -717,7 +729,12 @@ function checkSplitScore() {
     if (splitScore > 21) {
         alert ("Bust!");
         alert (`You Scored: ${splitScore}`);
-        player = false;
+        if (!firstHand) {
+            playerLost();
+        } else {
+            splitGame = false;
+            checkPlayerScore();
+        }
     }
 }
 
@@ -739,69 +756,67 @@ function checkDealerScore() {
  */
 function playDealerTurn() {
     dealerTurn = true;
-    let playerScore = getHandValue(playerHand);
-    let splitPlayerScore = getHandValue(splitHand);
-    let dealerScore = getHandValue(dealerHand);
+    let dealerScore;
+    let betterScore;
     revealDealerCard();
+    dealCards(dealerHand, 'dealer');
 
     while (dealerTurn) {
-        if (!splitGame) {
-            playerScore = getHandValue(playerHand);
-            splitPlayerScore = getHandValue(splitHand);
-            dealerScore = getHandValue(dealerHand);
+        dealerScore = getHandValue(dealerHand);
+        betterScore = getHighestPlayerScore();
 
-            if (dealerScore < playerScore && playerScore <= 21) {
-                // dealer will hit when less than playerScore
-                hit(dealerHand);
-                dealCards(dealerHand, 'dealer');
-                checkDealerScore();
-            } else if (dealerScore === playerScore && dealerScore <= 15) {
-                // dealer will hit to try and beat player
-                hit(dealerHand);
-                dealCards(dealerHand, 'dealer');
-                checkDealerScore();
-            } else {
-                // dealer will stand to draw/win
-                dealerStand();
-                checkDealerScore();
-            }
-        } 
-        
-        if (splitGame) {
-            playerScore = getHandValue(playerHand);
-            splitPlayerScore = getHandValue(splitHand);
-            dealerScore = getHandValue(dealerHand);
-
-            if (dealerScore < playerScore && playerScore <= 21 || dealerScore < splitPlayerScore && splitPlayerScore <= 21) {
-                // dealer will hit when less than playerScore
-                hit(dealerHand);
-                dealCards(dealerHand, 'dealer');
-                checkDealerScore();
-            } else if (dealerScore === playerScore && dealerScore === splitPlayerScore && dealerScore <= 15 ) {
-                // dealer will hit to try and beat player
-                hit(dealerHand);
-                dealCards(dealerHand, 'dealer');
-                checkDealerScore();
-            } else {
-                // dealer will stand to draw/win
-                dealerStand();
-                checkDealerScore();
-            }
+        if (dealerScore < betterScore && betterScore <= 21) {
+            // dealer will hit when less than playerScore
+            hit(dealerHand);
+            dealCards(dealerHand, 'dealer');
+            checkDealerScore();
+        } else if (dealerScore === betterScore && dealerScore <= 15) {
+            // dealer will hit to try and beat player
+            hit(dealerHand);
+            dealCards(dealerHand, 'dealer');
+            checkDealerScore();
+        } else {
+            // dealer will stand to draw/win
+            dealerStand();
+            checkDealerScore();
         }
     }
+
+    endDealerTurn();
+
+}
+
+/**
+ * ends dealer turn and resolves game
+ */
+function endDealerTurn() {
+    let dealerScore = getHandValue(dealerHand);
+    let betterScore = getHighestPlayerScore(playerHand);    
     
-    if (dealerScore > playerScore && dealerScore <= 21 && !splitGame) {
+    if (dealerScore > betterScore && dealerScore <= 21) {
         playerLost();
-    } else if (dealerScore > playerScore && dealerScore > splitPlayerScore && dealerScore <= 21 && splitGame) {
-        playerLost();
-    } else if (dealerScore === playerScore && dealerScore <=21 && !splitGame) {
-        draw();
-    } else if (dealerScore === playerScore && dealerScore === splitPlayerScore && dealerScore <=21 &&splitGame) {
+    } else if (dealerScore === betterScore && dealerScore <=21) {
         draw();
     } else {
         playerWon();
     }
+}
 
+/**
+ * gets the highest player score that is equal/less than 21
+ */
+function getHighestPlayerScore() {
+    let firstScore = getHandValue(playerHand);
+    let secondScore = getHandValue(splitHand);
+    let highestScore;
+
+    if (firstScore >= secondScore && firstScore <= 21) {
+        highestScore = firstScore;
+    } else {
+        highestScore = secondScore;
+    }
+
+    return highestScore;
 }
 
 /**
@@ -858,6 +873,7 @@ function playerWon() {
     toggleNewGameShow();
     toggleConHide();
     toggleSplitConHide();
+    toggleSplitRevert();
 }
 
 /**
@@ -871,6 +887,7 @@ function playerLost() {
     toggleNewGameShow();
     toggleConHide();
     toggleSplitConHide();
+    toggleSplitRevert();
 }
 
 /**
@@ -887,6 +904,7 @@ function draw() {
     toggleNewGameShow();
     toggleConHide();
     toggleSplitConHide();
+    toggleSplitRevert();
 }
 
 /**
@@ -911,6 +929,7 @@ function newGame() {
     toggleBetShow();
     toggleConHide();
     toggleSplitConHide();
+    toggleSplitRevert();
     placeBet();
 }
 
@@ -920,7 +939,7 @@ function newGame() {
 function toggleBetShow() {
     var div = document.getElementsByClassName('toggle-bet');
     for (var i = 0; i < div.length; i ++) {
-        div[i].style.visibility = 'visible';
+        div[i].style.display = "block";
     }
 }
 
@@ -930,39 +949,69 @@ function toggleBetShow() {
 function toggleBetHide() {
     var div = document.getElementsByClassName('toggle-bet');
     for (var i = 0; i < div.length; i ++) {
-        div[i].style.visibility = 'hidden';
+        div[i].style.display = 'none';
     }
 }
 
 /**
  * toggles the control buttons on when it is the player's turn
  */
+// function toggleConShow() {
+//     var div = document.getElementsByClassName('toggle-con');
+//     for (var i = 0; i < div.length; i ++) {
+//         div[i].style.visibility = 'visible';
+//     }
+// }
 function toggleConShow() {
     var div = document.getElementsByClassName('toggle-con');
     for (var i = 0; i < div.length; i ++) {
-        div[i].style.visibility = 'visible';
+        div[i].style.display = 'flex';
     }
 }
 
 /**
  * toggles the control buttons off when the player ends their turn
  */
+// function toggleConHide() {
+//     var div = document.getElementsByClassName('toggle-con');
+//     for (var i = 0; i < div.length; i ++) {
+//         div[i].style.visibility = 'hidden';
+//     }
+// }
+
 function toggleConHide() {
     var div = document.getElementsByClassName('toggle-con');
     for (var i = 0; i < div.length; i ++) {
-        div[i].style.visibility = 'hidden';
+        div[i].style.display = 'none';
     }
 }
 
 /**
  * shows the double button when it can be played
  */
+// function toggleDoubleShow() {
+//     var div = document.getElementsByClassName('double');
+//     for (var i = 0; i < div.length; i ++) {
+//         div[i].style.visibility = 'visible';
+//     }
+// }
+
 function toggleDoubleShow() {
     var div = document.getElementsByClassName('double');
     for (var i = 0; i < div.length; i ++) {
-        div[i].style.visibility = 'visible';
+        div[i].style.display = 'block';
     }
 }
+
+/**
+ * hides the double button when it cannot be played
+ */
+// function toggleDoubleHide() {
+//     var div = document.getElementsByClassName('double');
+//     for (var i = 0; i < div.length; i ++) {
+//         div[i].style.visibility = 'hidden';
+//     }
+// }
 
 /**
  * hides the double button when it cannot be played
@@ -970,47 +1019,103 @@ function toggleDoubleShow() {
 function toggleDoubleHide() {
     var div = document.getElementsByClassName('double');
     for (var i = 0; i < div.length; i ++) {
-        div[i].style.visibility = 'hidden';
+        div[i].style.display = 'none';
     }
 }
 
 /**
  * shows the split button when it can be played
- */
+//  */
+// function toggleSplitShow() {
+//     var div = document.getElementsByClassName('split');
+//     for (var i = 0; i < div.length; i ++) {
+//         div[i].style.visibility = 'visible';
+//     }
+// }
+
 function toggleSplitShow() {
     var div = document.getElementsByClassName('split');
     for (var i = 0; i < div.length; i ++) {
-        div[i].style.visibility = 'visible';
+        div[i].style.display = 'block';
     }
 }
 
 /**
  * hides the split button when it cannot be played
  */
+// function toggleSplitHide() {
+//     var div = document.getElementsByClassName('split');
+//     for (var i = 0; i < div.length; i ++) {
+//         div[i].style.visibility = 'hidden';
+//     }
+// }
+
 function toggleSplitHide() {
     var div = document.getElementsByClassName('split');
     for (var i = 0; i < div.length; i ++) {
-        div[i].style.visibility = 'hidden';
+        div[i].style.display = 'none';
+    }
+}
+
+/**
+ * hides the split and double button when a split game is run by display none rather than visibility
+ */
+function toggleSplitNone() {
+    var double = document.getElementsByClassName('double');
+    var split = document.getElementsByClassName('split');
+    for (var i = 0; i < double.length; i ++) {
+        double[i].style.display = 'none';
+    }
+    for (var i = 0; i < split.length; i ++) {
+        split[i].style.display = 'none';
+    }
+}
+
+/**
+ * shows the split and double button when split game ends
+ */
+function toggleSplitRevert() {
+    var double = document.getElementsByClassName('double');
+    var split = document.getElementsByClassName('split');
+    for (var i = 0; i < double.length; i ++) {
+        double[i].style.display = "";
+    }
+    for (var i = 0; i < split.length; i ++) {
+        split[i].style.display = "";
     }
 }
 
 /**
  * shows the new game button when it can be played
  */
+// function toggleNewGameShow() {
+//     var div = document.getElementsByClassName('new-game');
+//     for (var i = 0; i < div.length; i ++) {
+//         div[i].style.visibility = 'visible';
+//     }
+// }
+
 function toggleNewGameShow() {
     var div = document.getElementsByClassName('new-game');
     for (var i = 0; i < div.length; i ++) {
-        div[i].style.visibility = 'visible';
+        div[i].style.display = 'block';
     }
 }
 
 /**
  * hides the new game button when it cannot be played
  */
+// function toggleNewGameHide() {
+//     var div = document.getElementsByClassName('new-game');
+//     for (var i = 0; i < div.length; i ++) {
+//         div[i].style.visibility = 'hidden';
+//     }
+// }
+
 function toggleNewGameHide() {
     var div = document.getElementsByClassName('new-game');
     for (var i = 0; i < div.length; i ++) {
-        div[i].style.visibility = 'hidden';
+        div[i].style.display = 'none';
     }
 }
 
