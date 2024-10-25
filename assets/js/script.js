@@ -490,6 +490,11 @@ function runGame(gameType) {
     dealCards(dealerHand, 'dealer');
     checkPlayerScore();
     checkDealerScore();
+    cost = getPotValue();
+    if (cost > 0) {
+        document.getElementById('double-cost').innerHTML = cost;
+        document.getElementById('split-cost').innerHTML = cost;
+    }
     if (playerHand[0].value === playerHand[1].value && allowSplitGame) {
         toggleSplitShow();
     } else {
@@ -610,7 +615,6 @@ function dealCards(hand, idString) {
  */
 function hideDealerCard () {
     hiddenCard = dealerHand.pop();
-    console.log(hiddenCard);
 }
 
 /**
@@ -618,7 +622,6 @@ function hideDealerCard () {
  */
 function revealDealerCard () {
     dealerHand.push(hiddenCard);
-    console.log(dealerHand);
 }
 
 /**
