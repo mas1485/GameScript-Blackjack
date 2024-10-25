@@ -217,6 +217,13 @@ a#home {
     justify-content: space-between;
 }
 
+#test-area {
+    background: orange;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
 #score {
     display: block;
     border: 5px solid;
@@ -224,6 +231,31 @@ a#home {
     width: 60px;
     bottom: 20px;
     position: relative;
+}
+
+/* Cards */
+.card {
+    height: 100px;
+    width: 70px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    border: 1px solid black;
+    border-radius: 5px;
+    position: relative;
+    background-color: white;
+}
+
+.diamonds .hearts {
+    color: #ff0000;
+}
+
+.spades .clubs {
+    color: #2f2f31;
+}
+
+.ace {
+    text-align:center;
+    font-size:36pt;
+    content:"A";
 }
 
 /* Buttons */
