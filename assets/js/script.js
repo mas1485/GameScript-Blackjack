@@ -444,7 +444,6 @@ let useSplitHand = false;
  */
 document.addEventListener("DOMContentLoaded", function() {
     let burgerIcon = document.getElementById("mega-menu");
-    console.log(burgerIcon);
     burgerIcon.addEventListener("click", function() {
         console.log("buttonpress");
         burgerNav();
@@ -658,6 +657,9 @@ function removeSecondCard() {
     playerHand.splice(1);
 }
 
+/**
+ * deals the cards to the html
+ */
 function dealCards(hand, idString) {
     let htmlHand = "";
     for (let i = 0 ; i < hand.length ; i++) {
@@ -666,10 +668,39 @@ function dealCards(hand, idString) {
         var cardFrontend = hand[i].frontend;
         var htmlValue = `<container class="card ${cardName} ${cardSuit}">${cardFrontend}</container>`;
         htmlHand += htmlValue;
+
     }
-    styleHand = document.getElementById(idString);
     document.getElementById(idString).innerHTML = htmlHand;
+    styleCards();
 }
+
+/**
+ * styles the cards by adding content based on suit
+ */
+// function styleCards() {
+//     var hearts = document.getElementsByClassName("hearts").innerHTML;
+//     hearts.appendChild() = document.createElement("IMG").src;
+//     console.log(hearts)
+
+//     var diamonds = document.getElementsByClassName("diamonds");
+//     diamonds.appendChild() = document.createElement("IMG").src;
+
+//     var spades = document.getElementsByClassName('spades').innerHTML;
+//     spades.appendChild() = document.createElement("IMG").src;
+
+//     var clubs = document.getElementsByClassName('clubs');
+//     clubs.appendChild() = document.createElement("IMG").src;
+// }
+
+// function styleCards() {
+//     let hearts = document.getElementsByClassName("hearts");
+//     heartsIMG = hearts;
+//     heartsIMG = document.createElement('img');
+//     document.getElementById("hearts-img").src ="test.png";
+//     document.getElementById("diamonds-img").src ="test.png";
+//     document.getElementById("spades-img").src ="test.png";    
+//     document.getElementById("clubs-img").src ="test.png";
+// }
 
 /**
  * treats the dealer card as if "face-down"
