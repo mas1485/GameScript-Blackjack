@@ -714,11 +714,13 @@ function dealerStand() {
 function checkPlayerScore() {
     let playerScore = getHandValue(playerHand);
     document.getElementById('tracker-player').innerHTML = playerScore;
-    if (playerScore > 21 && !splitGame) {
-        playerLost();
-    } else {
-        firstHand = false;
-        checkSplitScore();
+    if (playerScore > 21) {
+        if (!splitGame) {
+            playerLost();
+        } else {
+            firstHand = false;
+            checkSplitScore();
+        }
     }
 }
 
@@ -728,12 +730,14 @@ function checkPlayerScore() {
 function checkSplitScore() {
     let splitScore = getHandValue(splitHand);
     document.getElementById('tracker-split').innerHTML = splitScore;
-    if (splitScore > 21 && !firstHand) {
-        playerLost();
-    } else {
-        splitGame = false;
-        checkPlayerScore();
-    }
+    if (splitScore > 21) {
+        if (!firstHand) {
+            playerLost();
+        } else {
+            splitGame = false;
+            checkPlayerScore();
+        }
+    }   
 }
 
 /**
