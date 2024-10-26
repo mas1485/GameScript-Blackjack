@@ -445,7 +445,6 @@ let useSplitHand = false;
 document.addEventListener("DOMContentLoaded", function() {
     let burgerIcon = document.getElementById("mega-menu");
     burgerIcon.addEventListener("click", function() {
-        console.log("buttonpress");
         burgerNav();
     });
     let buttons = document.getElementsByTagName("button");
@@ -516,6 +515,9 @@ document.addEventListener("DOMContentLoaded", function() {
     toggleNewGameHide();
     toggleSplitConHide();
     toggleSplitRevert();
+    togglePlayerTrackerHide();
+    toggleSplitTrackerHide();
+    toggleDealerTrackerHide();
     updateScore();
 
 });
@@ -551,6 +553,8 @@ function runGame(gameType) {
     dealCards(dealerHand, 'dealer');
     checkPlayerScore();
     checkDealerScore();
+    togglePlayerTrackerShow();
+    toggleDealerTrackerShow();
     cost = getPotValue();
     if (cost > 0) {
         document.getElementById('double-cost').innerHTML = cost;
@@ -933,6 +937,8 @@ function newGame() {
     toggleSplitConHide();
     toggleSplitRevert();
     toggleSplitTrackerHide();
+    toggleDealerTrackerHide();
+    togglePlayerTrackerHide();
     placeBet();
 }
 
@@ -1086,17 +1092,53 @@ function toggleSplitConHide() {
 }
 
 /**
- * shows the hit/stand buttons when a split game is played
+ * toggles split tracker off
  */
 function toggleSplitTrackerShow() {
     var div = document.getElementById('tracker-split');
     div.style.display = 'block';
+    div.style.visibility = 'visible';
 }
 
 /**
- * shows the hit/stand buttons when a split game is played
+ * toggles split tracker off
  */
 function toggleSplitTrackerHide() {
     var div = document.getElementById('tracker-split');
+    div.style.display = 'none';
+    div.style.visibility = 'hidden';
+}
+
+/**
+ * toggles player tracker on
+ */
+function togglePlayerTrackerShow() {
+    var div = document.getElementById('tracker-player');
+    div.style.display = 'block';
+    div.style.visibility = 'visible';
+}
+
+/**
+ * toggles player tracker off
+ */
+function togglePlayerTrackerHide() {
+    var div = document.getElementById('tracker-player');
+    div.style.display = 'none';
+    div.style.visibility = 'hidden';
+}
+
+/**
+ * toggles dealer tracker on
+ */
+function toggleDealerTrackerShow() {
+    var div = document.getElementById('tracker-dealer');
+    div.style.display = 'block';
+}
+
+/**
+ * toggles dealer tracker off
+ */
+function toggleDealerTrackerHide() {
+    var div = document.getElementById('tracker-dealer');
     div.style.display = 'none';
 }
