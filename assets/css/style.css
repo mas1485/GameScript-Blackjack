@@ -30,7 +30,7 @@ a {
 /* Body */
 
 body {
-    background-color: white;
+    background: linear-gradient(290deg, #4682b4 0%, #b0c4de   50%, #b0c4de 50%, #3aad7d 100%);
     font-family: "Quicksand", sans-serif;
     color: black;
     text-align: center;
@@ -167,8 +167,9 @@ li:hover {
     color: white;
     padding: 15px 15px;
     background-color: inherit;
-    font: inherit; /* Important for vertical align on mobile phones */
-    margin: 0; /* Important for vertical align on mobile phones */
+    font-size: 18px;
+    font: inherit;
+    margin: 0;
 }
 
 .navbar li:hover, .dropdown:hover .dropbtn {
@@ -203,6 +204,15 @@ li:hover {
 
 .dropdown-content li:hover {
     background-color: rgb(42, 147, 165);
+}
+
+/* Home Page */
+.welcome {
+    padding: 10px;
+    margin: 10px;
+    row-gap: 10px;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Game Area */
@@ -463,6 +473,62 @@ i.clubs, i.diamonds, i.hearts, i.spades {
 .btn-black:hover {
     background-color: rgb(75, 75, 75);
     border-color: #838383;
+}
+
+.box {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    margin: 10px;
+    row-gap: 10px;
+    border: 2px solid;
+    background-color: rgb(37 37 139);
+}
+
+/* Contact Page */
+#contactpage {
+    background: linear-gradient(290deg, #4682b4 0%, #b0c4de   50%, #b0c4de 50%, #3aad7d 100%);
+    min-height: 75vh;
+}
+
+#contact {
+    background-color: #e6e7e9;
+    border-radius: 10px;
+    padding: 30px;
+    display: block;
+}
+
+#contact-form {
+    color: #666;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#contact-form > h2 {
+    margin-bottom: 20px;
+    color: #3a3a3a;
+}
+
+#contact-form > h2 > i {
+    color: #3a3a3a;
+}
+
+.message {
+    width: 100%;
+    min-height: 100px;
+}
+
+.padding {
+    padding: 25px;
+}
+
+textarea {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    min-height: 100px;
 }
 
 

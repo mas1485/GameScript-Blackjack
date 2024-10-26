@@ -560,7 +560,7 @@ function runGame(gameType) {
     checkDealerScore();
     togglePlayerTrackerShow();
     toggleDealerTrackerShow();
-    cost = getPotValue();
+    let cost = getPotValue();
     if (cost > 0) {
         document.getElementById('double-cost').innerHTML = cost;
         document.getElementById('split-cost').innerHTML = cost;

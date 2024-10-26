@@ -12,36 +12,72 @@
     <header class="topnav">
         <h1>
             <a href="index.html" id="home">
-                <img class="logo" src="assets/images/gamescript.png" alt="Blackjack logo">
+                <img class="home-logo" src="assets/images/gamescript.png" alt="Blackjack logo">
             </a>
         </h1>
         <h1 class="heading">
-            <img class="logo" src="assets/images/2063584.png" alt="Blackjack logo">Home
+            <img class="heading-logo" src="assets/images/2063584.png" alt="Blackjack logo">Home
         </h1>
         <!-- Hidden Navlinks -->
         <nav>
             <ul id="menu">
-                <li><a href="index.html">GameScript</a></li>
+                <li class="active"><a href="index.html">Home</a></li>
                 <li><a href="contact.html">Contact</a></li>
-                <div class="dropdown">
+                <li class="dropdown">
                     <button class="dropbtn">Games
                         <i class="fa fa-caret-down"></i>
                     </button>
-                    <div class="dropdown-content">
-                        <a href="blackjack.html" class="active">Blackjack</a>
-                        <a href="poker.html">Poker</a>
-                        <a href="roulette.html">Roulette</a>
-                    </div>
-                </div>
+                    <ul class="dropdown-content">
+                        <li><a href="blackjack.html">Blackjack</a></li>
+                        <li><a href="poker.html">Poker</a></li>
+                        <li><a href="roulette.html">Roulette</a></li>
+                    </ul>
+                </li>
             </ul>
         </nav>
         <!-- Nav Burger Menu -->
-        <a href="javascript:void(0);" class="icon" onclick="burgerNav()">
+        <div id="mega-menu" class="icon">
             <i class="fa fa-bars"></i>
-        </a>
+        </div>
     </header>
     <main>
-
+        <div class="welcome">
+            <h1>Welcome to GameScript!</h1>
+            <h2>This is our hub where you can access our games!</h2>
+            <h3>We only have one game ready for you to play, please feel free to follow us on social media for updates!</h3>
+        </div>
+        <div class="box">
+            <div>
+                <h3>About Us</h3>
+            </div>
+            <div>
+                <p>GameScript is a hub for simple games made using JavaScript, no heavy downloads and all of our games are free to play!</p>
+            </div>
+            <div>
+                <p>In the future, we look to provide our users with the ability to purchase points in order to play premium versions of our games and win prizes!</p>
+            </div>
+            <div>
+                <p>We currently only have one game set up ready for you, which is our blackjack game which you can play here!</p>
+            </div>
+            <div>
+                <a href="blackjack.html">
+                    <button class="btn">Play blackjack</button>
+                </a>
+            </div>
+        </div>
+        <div class="box">
+            <div>
+                <h3>Contact Us</h3>
+            </div>
+            <div>
+                <p>Want to provide feedback? Looking to collaborate with us in the future or simply want to learn more? Use our contact form page which you can access below!</p>
+            </div>
+            <div>
+                <a href="contact.html">
+                    <button class="btn">Contact us</button>
+                </a>
+            </div>
+        </div>
     </main>
     <!-- Footer -->
     <footer>
@@ -50,30 +86,30 @@
             <div>
                 <h4>Home</h4>
                 <ul>
-                    <li><a href="">GameScript</a></li>
-                    <li><a href="">About Us</a></li>          
+                    <li><a href="index.html">GameScript</a></li>
+                    <li><a href="index.html">About Us</a></li>          
                 </ul>
             </div>
             <div>
                 <h4>Games</h4>
                 <ul>
-                    <li><a href="">Blackjack</a></li>
-                    <li><a href="">Poker</a></li>
-                    <li><a href="">Roulette</a></li>        
+                    <li><a href="blackjack.html">Blackjack</a></li>
+                    <li><a href="inprogress.html">Poker</a></li>
+                    <li><a href="inprogress.html">Roulette</a></li>        
                 </ul>
             </div>
             <div>
                 <h4>Contact</h4>
                 <ul>
-                    <li><a href="">FAQ</a></li>
-                    <li><a href="">Contact Us</a></li>
+                    <li><a href="index.html">FAQ</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
                 </ul>
             </div>
             <div>
                 <h4>Account</h4>
                 <ul>
-                    <li><a href="">Login</a></li>
-                    <li><a href="">Balance</a></li>
+                    <li><a href="inprogress.html">Login</a></li>
+                    <li><a href="inprogress.html">Balance</a></li>
                 </ul>
             </div>
          </section>
