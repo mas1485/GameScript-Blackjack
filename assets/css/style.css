@@ -397,6 +397,8 @@ i.clubs, i.diamonds, i.hearts, i.spades {
     display: block;
     background: #a7a7a7;
     border-radius: 5px;
+    width: 150px;
+    justify-self: center;
 }
 
 .btn-con {
