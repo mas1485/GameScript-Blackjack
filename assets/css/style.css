@@ -247,6 +247,21 @@ li:hover {
     justify-content: space-between;
 }
 
+#pot {
+    display: none;
+    border: 2px solid;
+    border-radius: 50%;
+    background-color: #a38a03;
+    border: 5px dashed;
+    border-color: #dddddd;
+    color: #dddddd;
+    height: 55px;
+    width: 55px;
+    font-size: 14px;
+    position: relative;
+    align-content: center;
+}
+
 #score {
     display: block;
     border: 2px solid;

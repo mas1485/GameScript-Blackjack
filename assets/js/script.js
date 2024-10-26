@@ -486,18 +486,23 @@ document.addEventListener("DOMContentLoaded", function() {
             }
             if (this.getAttribute("data-type") === "bet10" && betStage) {
                 placeBet(10);
+                togglePotShow();
             }
             if (this.getAttribute("data-type") === "bet50" && betStage) {
                 placeBet(50);
+                togglePotShow();
             }
             if (this.getAttribute("data-type") === "bet100" && betStage) {
                 placeBet(100);
+                togglePotShow();
             }
             if (this.getAttribute("data-type") === "bet500" && betStage) {
                 placeBet(500);
+                togglePotShow();
             }
             if (this.getAttribute("data-type") === "bet1000" && betStage) {
                 placeBet(1000);
+                togglePotShow();
             }
             if (this.getAttribute("data-type") === "lock-bet" && betStage) {
                 runGame("blackjack");
@@ -939,6 +944,7 @@ function newGame() {
     toggleSplitTrackerHide();
     toggleDealerTrackerHide();
     togglePlayerTrackerHide();
+    togglePotHide();
     placeBet();
 }
 
@@ -1140,5 +1146,21 @@ function toggleDealerTrackerShow() {
  */
 function toggleDealerTrackerHide() {
     var div = document.getElementById('tracker-dealer');
+    div.style.display = 'none';
+}
+
+/**
+ * toggles pot on
+ */
+function togglePotShow() {
+    var div = document.getElementById('pot');
+    div.style.display = 'block';
+}
+
+/**
+ * toggles pot off
+ */
+function togglePotHide() {
+    var div = document.getElementById('pot');
     div.style.display = 'none';
 }
