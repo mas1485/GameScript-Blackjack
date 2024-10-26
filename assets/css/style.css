@@ -284,6 +284,27 @@ li:hover {
     position: relative;
 }
 
+#alert {
+    position: absolute;
+    display: none;
+    width: 280px;
+    height: 150px;
+    background-color: #dddddd;
+    border: 5px;
+    border-radius: 14px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.5s;
+}
+
+#alert:hover {
+    background-color: #7e7e7e81;
+}
+
 .tracker {
     display: none;
     border: 2px solid;

@@ -438,14 +438,17 @@ let allowSplitGame = true;
 let firstHand = true;
 let splitGame = false;
 let useSplitHand = false;
+let buttonPress = false;
 
 /**
  * Wait for dom to load before starting game 
  */
 document.addEventListener("DOMContentLoaded", function() {
+    buttonPress = false;
     let buttons = document.getElementsByTagName("button");
     for (let button of buttons) {
         button.addEventListener("click", function() {
+            buttonPress = true;
             if (this.getAttribute("data-type") === "hit" && playerTurn) {
                 hit(playerHand);
                 toggleSplitHide();
@@ -521,6 +524,14 @@ document.addEventListener("DOMContentLoaded", function() {
     toggleDealerTrackerHide();
     updateScore();
 
+    document.addEventListener("click", function() {
+        if (!buttonPress) {
+            hideAlert();
+        } else {
+            buttonPress = false;
+        }
+    });
+    
 });
 
 /**
@@ -703,15 +714,11 @@ function dealerStand() {
 function checkPlayerScore() {
     let playerScore = getHandValue(playerHand);
     document.getElementById('tracker-player').innerHTML = playerScore;
-    if (playerScore > 21) {
-        alert ("Bust!");
-        alert (`You Scored: ${playerScore}`);
-        if (!splitGame) {
-            playerLost();
-        } else {
-            firstHand = false;
-            checkSplitScore();
-        }
+    if (playerScore > 21 && !splitGame) {
+        playerLost();
+    } else {
+        firstHand = false;
+        checkSplitScore();
     }
 }
 
@@ -721,15 +728,11 @@ function checkPlayerScore() {
 function checkSplitScore() {
     let splitScore = getHandValue(splitHand);
     document.getElementById('tracker-split').innerHTML = splitScore;
-    if (splitScore > 21) {
-        alert ("Bust!");
-        alert (`You Scored: ${splitScore}`);
-        if (!firstHand) {
-            playerLost();
-        } else {
-            splitGame = false;
-            checkPlayerScore();
-        }
+    if (splitScore > 21 && !firstHand) {
+        playerLost();
+    } else {
+        splitGame = false;
+        checkPlayerScore();
     }
 }
 
@@ -740,8 +743,6 @@ function checkDealerScore() {
     let dealerScore = getHandValue(dealerHand);
     document.getElementById('tracker-dealer').innerHTML = dealerScore;
     if (dealerScore > 21) {
-        alert ("Dealer Bust!");
-        alert (`Dealer Scored: ${dealerScore}`);
         dealerTurn = false;
     }
 }
@@ -864,7 +865,7 @@ function playerWon() {
     playerTurn = false;
     dealerTurn = false;
     betStage = false;
-    alert ("You Won!");
+    displayAlert("You Won!");
     toggleNewGameShow();
     toggleConHide();
     toggleSplitConHide();
@@ -878,7 +879,7 @@ function playerLost() {
     playerTurn = false;
     dealerTurn = false;
     betStage = false;
-    alert ("You Lost!");
+    displayAlert("You Won!");
     toggleNewGameShow();
     toggleConHide();
     toggleSplitConHide();
@@ -895,7 +896,7 @@ function draw() {
     playerTurn = false;
     dealerTurn = false;
     betStage = false;
-    alert ("You Drew!");
+    displayAlert("You Won!");
     toggleNewGameShow();
     toggleConHide();
     toggleSplitConHide();
@@ -929,6 +930,7 @@ function newGame() {
     toggleDealerTrackerHide();
     togglePlayerTrackerHide();
     togglePotHide();
+    hideAlert();
     placeBet();
 }
 
@@ -1146,5 +1148,22 @@ function togglePotShow() {
  */
 function togglePotHide() {
     var div = document.getElementById('pot');
+    div.style.display = 'none';
+}
+
+/**
+ * alert message shown
+ */
+function displayAlert(message) {
+    var div = document.getElementById('alert');
+    div.style.display = 'flex';
+    div.innerText = message;
+}
+
+/**
+ * alert message hide
+ */
+function hideAlert() {
+    var div = document.getElementById('alert');
     div.style.display = 'none';
 }
