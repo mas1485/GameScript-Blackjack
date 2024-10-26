@@ -883,7 +883,7 @@ function playerLost() {
     playerTurn = false;
     dealerTurn = false;
     betStage = false;
-    displayAlert("You Won!");
+    displayAlert("You Lost!");
     toggleNewGameShow();
     toggleConHide();
     toggleSplitConHide();
@@ -900,7 +900,7 @@ function draw() {
     playerTurn = false;
     dealerTurn = false;
     betStage = false;
-    displayAlert("You Won!");
+    displayAlert("You Drew!");
     toggleNewGameShow();
     toggleConHide();
     toggleSplitConHide();

@@ -1,131 +1,60 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Welcome to my Project Two Blackjack Game
 
-Welcome USER_NAME,
+##Blackjack
 
-This is the Code Institute student template for Gitpod. We have preinstalled all of the tools you need to get started. It's perfectly ok to use this template as the basis for your project submissions.
+My project for the course is a blackjack game which uses HTML, CSS and JavaScript, I wanted to make a simple game which could show the potential of on online game used by professionals. Whilst the blackjack game itself is not named, I have named the *'hub'* that the game sits in as GameScript, the user should see a little about the site on the index/home page and there is the beginnings of a site which could host a number of other games with the identity of being a pure script only game.
 
-You can safely delete this README.md file or change it for your own project. Please do read it at least once, though! It contains some important information about Gitpod and the extensions we use. Some of this information has been updated since the video content was created. The last update to this file was: **June 18, 2024**
+GameScript would aim to be a free platform for games *however* users would be able to login to their account and make premium purchases (although this is not yet implemented due to being a short project focusing only on the blackjack game).
 
-## Gitpod Reminders
+Just a few announcements before you continue;
 
-To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
+The rules of blackjack vary, I am using the rules I know going to the casinos in my local areas, including London, so think of it as a European styled blackjack game.
 
-`python3 -m http.server`
+I have added images of the site, however I can only display in black/white. If you want to see the color of the site, look at it using the website link.
 
-A blue button should appear to click: _Make Public_,
+The main focus of the site is the blackjack game, the other pages are a simple design and there is not much else to discuss.
 
-Another blue button should appear to click: _Open Browser_.
+If you want to see the code, look at it in the script or blackjack in js.
 
-To run a backend Python file, type `python3 app.py` if your Python file is named `app.py`, of course.
+If you want to see my commit history for how development took place, just bear in mind that I use fork so I have subjects aswell as descriptions. I also a full-time as a business consultant working on a *supposed* part-time course so commits may be varied in regularity as expected.
 
-A blue button should appear to click: _Make Public_,
+##GameScript Homepage
 
-Another blue button should appear to click: _Open Browser_.
+![Homepage.](assets/images/homepage.pdf)
 
-By Default, Gitpod gives you superuser security privileges. Therefore, you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
+This is the homepage of the hub that the game sits in, as the focus was on the game, this was just to show how the blackjack game would be accessed and give the user an idea of the practical element of the game, as part of a wider online community of games, whether linked to gambling or for more casual players.
 
-To log into the Heroku toolbelt CLI:
+##Features
 
-1. Log in to your Heroku account and go to *Account Settings* in the menu under your avatar.
-2. Scroll down to the *API Key* and click *Reveal*
-3. Copy the key
-4. In Gitpod, from the terminal, run `heroku_config`
-5. Paste in your API key when asked
+###NavBar
 
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you, so do not share it. If you accidentally make it public, you can create a new one with _Regenerate API Key_.
+![NavBar](assets/images/navbarhtml.pdf)
 
-### Connecting your Mongo database
+This is the NavBar, whilst there is not alot of content on it, the user can see where the potential for growth is, the nav bar also contains a *Mega-Menu* which is a dropdown section allowing the user to however over *games* in the list and this will drop down a further menu based on the potential games. This was made by using all the tools at my disposal and I took the idea from W3schools and tweaked it to match my needs. Url is https://www.w3schools.com/howto/howto_css_mega_menu.asp
 
-- **Connect to Mongo CLI on a IDE**
-- navigate to your MongoDB Clusters Sandbox
-- click **"Connect"** button
-- select **"Connect with the MongoDB shell"**
-- select **"I have the mongo shell installed"**
-- choose **mongosh (2.0 or later)** for : **"Select your mongo shell version"**
-- choose option: **"Run your connection string in your command line"**
-- in the terminal, paste the copied code `mongo "mongodb+srv://<CLUSTER-NAME>.mongodb.net/<DBname>" --apiVersion 1 --username <USERNAME>`
-  - replace all `<angle-bracket>` keys with your own data
-- enter password _(will not echo **\*\*\*\*** on screen)_
+###Blackjack
 
-------
+This is the Blackjack game, the style is simple yet the user gets a feeling they are at a table, the green background with the red felt and the chips in various appropriate colors.
 
-## Release History
+The first thing a player needs to do is decide to bet, to bet, they need to click the chip(s) they want to use to bet, the player starts at 1000 indicated by the score, however in future this will reflect the *balance* in a players account if they want to actually gamble. To simply play the game without a bet, just click the button *drawcards* without clicking any chips. As in real-life casino, all bets are final and the player cannot retract a bet. Maybe in the future depending on user experience this can change but I wanted the game to feel as if you were at a table.
 
-We continually tweak and adjust this template to help give you the best experience. Here is the version history:
+If a bet is made the pot appears with the amount bet by the player.
 
-**June 18, 2024,** Add Mongo back into template
+![Blackjack](assets/images/blackjackpage.pdf)
 
-**June 14, 2024,** Temporarily remove Mongo until the key issue is resolved
+###Dealing Cards
 
-**May 28 2024:** Fix Mongo and Links installs
+When the game starts, two cards are dealt to the player and two to the dealer, I used an array in JS to create objects for each card and the computer will randomly select a card to deal, this will also prevent the card from being *redrawn* so there are no duplicates and the cards are no longer in the deck until they are shuffled back in when a newgame is started. The player can only see one of the dealers cards and there are trackers for the scores to help the user see the dealers score (only the known cards are calculated) and their own score.
 
-**April 26 2024:** Update node version to 16
+I have also allowed the four controls a player can take during a blackjack game, such as *hit*, *stand*, *double* and *split*. Each working as the player would expect and the buttons only appear when they are available to do so, the player cannot bet more than they have, so they cannot double if they don't have the funds (refresh the page to reset the score, this will be inplace until options to play for actual money would be setup but for now, no such immediate plans).
 
-**September 20 2023:** Update Python version to 3.9.17.
+The cards are also slightly interactive, the player can hover over them and feel as though they are *picking* up the card. This uses basic css styling to make it appear bigger from the other cards.
 
-**September 1 2021:** Remove `PGHOSTADDR` environment variable.
+![Player Controls](assets/images/allgames.pdf)
 
-**July 19 2021:** Remove `font_fix` script now that the terminal font issue is fixed.
+###Playing the Dealers turn
 
-**July 2 2021:** Remove extensions that are not available in Open VSX.
+The dealer makes moves based on the players score and whether or not the dealer has the same score, better or worse. Once the dealer has *finished* their turn, the game checks to see who won and an alert is displayed, the user can click anywhere to remove the alert.
 
-**June 30 2021:** Combined the P4 and P5 templates into one file, added the uptime script. See the FAQ at the end of this file.
+The score is updated and if the player wins, the pot is added to the score alongside the original bet. The player can then choose to play again and see if they fare better (or *worse!*).
 
-**June 10 2021:** Added: `font_fix` script and alias to fix the Terminal font issue
-
-**May 10 2021:** Added `heroku_config` script to allow Heroku API key to be stored as an environment variable.
-
-**April 7 2021:** Upgraded the template for VS Code instead of Theia.
-
-**October 21 2020:** Versions of the HTMLHint, Prettier, Bootstrap4 CDN and Auto Close extensions updated. The Python extension needs to stay the same version for now.
-
-**October 08 2020:** Additional large Gitpod files (`core.mongo*` and `core.python*`) are now hidden in the Explorer, and have been added to the `.gitignore` by default.
-
-**September 22 2020:** Gitpod occasionally creates large `core.Microsoft` files. These are now hidden in the Explorer. A `.gitignore` file has been created to make sure these files will not be committed, along with other common files.
-
-**April 16 2020:** The template now automatically installs MySQL instead of relying on the Gitpod MySQL image. The message about a Python linter not being installed has been dealt with, and the set-up files are now hidden in the Gitpod file explorer.
-
-**April 13 2020:** Added the _Prettier_ code beautifier extension instead of the code formatter built-in to Gitpod.
-
-**February 2020:** The initialisation files now _do not_ auto-delete. They will remain in your project. You can safely ignore them. They just make sure that your workspace is configured correctly each time you open it. It will also prevent the Gitpod configuration popup from appearing.
-
-**December 2019:** Added Eventyret's Bootstrap 4 extension. Type `!bscdn` in a HTML file to add the Bootstrap boilerplate. Check out the <a href="https://github.com/Eventyret/vscode-bcdn" target="_blank">README.md file at the official repo</a> for more options.
-
-------
-
-## FAQ about the uptime script
-
-**Why have you added this script?**
-
-It will help us to calculate how many running workspaces there are at any one time, which greatly helps us with cost and capacity planning. It will help us decide on the future direction of our cloud-based IDE strategy.
-
-**How will this affect me?**
-
-For everyday usage of Gitpod, it doesn’t have any effect at all. The script only captures the following data:
-
-- An ID that is randomly generated each time the workspace is started.
-- The current date and time
-- The workspace status of “started” or “running”, which is sent every 5 minutes.
-
-It is not possible for us or anyone else to trace the random ID back to an individual, and no personal data is being captured. It will not slow down the workspace or affect your work.
-
-**So….?**
-
-We want to tell you this so that we are being completely transparent about the data we collect and what we do with it.
-
-**Can I opt out?**
-
-Yes, you can. Since no personally identifiable information is being captured, we'd appreciate it if you let the script run; however if you are unhappy with the idea, simply run the following commands from the terminal window after creating the workspace, and this will remove the uptime script:
-
-```
-pkill uptime.sh
-rm .vscode/uptime.sh
-```
-
-**Anything more?**
-
-Yes! We'd strongly encourage you to look at the source code of the `uptime.sh` file so that you know what it's doing. As future software developers, it will be great practice to see how these shell scripts work.
-
----
-
-Happy coding!
