@@ -85,7 +85,7 @@ I am not aware of any unfixed bugs.
 
 ![Validator checked no errors](assets/images/htmlchecker.pdf)
 ![Validator checked no errors](assets/images/htmlchecker_blackjack.pdf)
-![Validator checked no errors](assets/images/htmlchecker_contact.pdf)
+![Validator checked no errors](assets/images/htmlchecker_contact.png)
 ![Validator checked no errors](assets/images/htmlchecker_inprogress.pdf)
 ![Validator checked no errors](assets/images/lighthouse.pdf)
 ![Validator checked no errors](assets/images/csschecker.pdf)
