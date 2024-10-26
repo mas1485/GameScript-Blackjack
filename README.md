@@ -62,7 +62,7 @@ See how I did for an example.
 
 ![Test game which I won](assets/images/testgame.png)
 
-So I put 200 into the pot by clicking the 100 chip twice. I then hit on a 15 as I knew I had an ace to fall back on, I got a score of 21, the dealer then hit to see if he could match but went over. I got the alert and my score updated from 1000 to 1200 as I bet 200.
+So I put 200 into the pot by clicking the 100 chip twice. I got a score of 21 and doubled my bet, the dealer then hit to see if he could match but went over. I got the alert and my score updated from 1000 to 1400 as I bet 400 total.
 
 ##Future of the game
 
