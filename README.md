@@ -10,7 +10,7 @@ Just a few announcements before you continue;
 
 The rules of blackjack vary, I am using the rules I know going to the casinos in my local areas, including London, so think of it as a European styled blackjack game.
 
-I have added images of the site, however I can only display in black/white. If you want to see the color of the site, look at it using the website link.
+I have added images of the site, however I can only display some in black/white.
 
 The main focus of the site is the blackjack game, the other pages are a simple design and there is not much else to discuss.
 
@@ -20,7 +20,7 @@ If you want to see my commit history for how development took place, just bear i
 
 ##GameScript Homepage
 
-![Homepage.](assets/images/homepage.pdf)
+![Homepage.](assets/images/homepage.png)
 
 This is the homepage of the hub that the game sits in, as the focus was on the game, this was just to show how the blackjack game would be accessed and give the user an idea of the practical element of the game, as part of a wider online community of games, whether linked to gambling or for more casual players.
 
@@ -28,7 +28,7 @@ This is the homepage of the hub that the game sits in, as the focus was on the g
 
 ###NavBar
 
-![NavBar](assets/images/navbarhtml.pdf)
+![NavBar](assets/images/navbarhtml.png)
 
 This is the NavBar, whilst there is not alot of content on it, the user can see where the potential for growth is, the nav bar also contains a *Mega-Menu* which is a dropdown section allowing the user to however over *games* in the list and this will drop down a further menu based on the potential games. This was made by using all the tools at my disposal and I took the idea from W3schools and tweaked it to match my needs. Url is https://www.w3schools.com/howto/howto_css_mega_menu.asp
 
@@ -40,7 +40,7 @@ The first thing a player needs to do is decide to bet, to bet, they need to clic
 
 If a bet is made the pot appears with the amount bet by the player. The score is updated as the bet amount is placed.
 
-![Blackjack](assets/images/blackjackpage.pdf)
+![Blackjack](assets/images/blackjackpage.png)
 
 ###Dealing Cards
 
@@ -50,7 +50,7 @@ I have also allowed the four controls a player can take during a blackjack game,
 
 The cards are also slightly interactive, the player can hover over them and feel as though they are *picking* up the card. This uses basic css styling to make it appear bigger from the other cards. The (first) ace is also treated as either an 11 or a 1 (with simple logic removing 10 from the sum if the hand contains an ace and goes over 21).
 
-![Player Controls](assets/images/allgames.pdf)
+![Player Controls](assets/images/allgames.png)
 
 ###Playing the Dealers turn
 
@@ -60,7 +60,7 @@ The score is updated and if the player wins, the pot is added to the score along
 
 See how I did for an example.
 
-![Test game which I won](assets/images/testgame.pdf)
+![Test game which I won](assets/images/testgame.png)
 
 So I put 200 into the pot by clicking the 100 chip twice. I then hit on a 15 as I knew I had an ace to fall back on, I got a score of 21, the dealer then hit to see if he could match but went over. I got the alert and my score updated from 1000 to 1200 as I bet 200.
 
@@ -83,14 +83,14 @@ The *warnings* in JS are about extensions but the code runs fine and no issues w
 
 I am not aware of any unfixed bugs.
 
-![Validator checked no errors](assets/images/htmlchecker.pdf)
-![Validator checked no errors](assets/images/htmlchecker_blackjack.pdf)
+![Validator checked no errors](assets/images/htmlchecker.png)
+![Validator checked no errors](assets/images/htmlchecker_blackjack.png)
 ![Validator checked no errors](assets/images/htmlchecker_contact.png)
-![Validator checked no errors](assets/images/htmlchecker_inprogress.pdf)
-![Validator checked no errors](assets/images/lighthouse.pdf)
-![Validator checked no errors](assets/images/csschecker.pdf)
-![Validator checked no errors](assets/images/jschecker_script.pdf)
-![Validator checked no errors](assets/images/jschecker.pdf)
+![Validator checked no errors](assets/images/htmlchecker_inprogress.png)
+![Validator checked no errors](assets/images/lighthouse.png)
+![Validator checked no errors](assets/images/csschecker.png)
+![Validator checked no errors](assets/images/jschecker_script.png)
+![Validator checked no errors](assets/images/jschecker.png)
 
 ##Deployment
 
@@ -104,6 +104,6 @@ The live link can be found here - https://mas1485.github.io/blackjack/index.html
 
 Other than W3 schools and whatever I could learn from the course, the code is mine from scratch. I used the template examples from w3 schools/codeinstitute and tweaked then to work for my code. No credit and no references needed for the code itself.
 
-I obtained the assets, such as the backgrounds and to icons from google images, they are not trademarked and I tpyed in a generic png request such as *goldcoinpng*.
+I obtained the assets, such as the backgrounds and to icons from google images public domain, they are not trademarked and I typed in a generic search request such as *goldcoinpng*.
 
-Icons obtained from fontawesome.
+Icons obtained from fontawesome at https://fontawesome.com/
