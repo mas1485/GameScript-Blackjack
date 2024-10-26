@@ -1019,11 +1019,11 @@ function toggleSplitHide() {
 function toggleSplitNone() {
     var double = document.getElementsByClassName('double');
     var split = document.getElementsByClassName('split');
-    for (var i = 0; i < double.length; i ++) {
-        double[i].style.display = 'none';
+    for (var allDouble = 0; allDouble < double.length; allDouble ++) {
+        double[allDouble].style.display = 'none';
     }
-    for (var i = 0; i < split.length; i ++) {
-        split[i].style.display = 'none';
+    for (var allSplit = 0; allSplit < split.length; allSplit ++) {
+        split[allSplit].style.display = 'none';
     }
 }
 
