@@ -89,6 +89,7 @@ div#home {
 .topnav #menu {
     display: none;
     flex-direction: column;
+    font-size: 18px;
 }
 
 .topnav div {
@@ -390,6 +391,12 @@ i.clubs, i.diamonds, i.hearts, i.spades {
 .btn {
     font-family: "Quicksand", sans-serif;
     text-transform: uppercase;
+}
+
+.btn-href {
+    display: block;
+    background: #a7a7a7;
+    border-radius: 5px;
 }
 
 .btn-con {
