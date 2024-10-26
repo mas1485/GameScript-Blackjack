@@ -475,6 +475,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 toggleSplitConShow();
                 toggleSplitHide();
                 toggleSplitNone();
+                toggleSplitTrackerShow();
             }
             if (this.getAttribute("data-type") === "stand" && playerTurn) {
                 playerStand();
@@ -668,10 +669,8 @@ function dealCards(hand, idString) {
         var cardFrontend = hand[i].frontend;
         var htmlValue = `<container class="card ${cardName} ${cardSuit}">${cardFrontend}</container>`;
         htmlHand += htmlValue;
-
     }
     document.getElementById(idString).innerHTML = htmlHand;
-    styleCards();
 }
 
 /**
@@ -961,6 +960,7 @@ function newGame() {
     toggleConHide();
     toggleSplitConHide();
     toggleSplitRevert();
+    toggleSplitTrackerHide();
     placeBet();
 }
 
@@ -985,14 +985,8 @@ function toggleBetHide() {
 }
 
 /**
- * toggles the control buttons on when it is the player's turn
+ * toggles the control buttons on
  */
-// function toggleConShow() {
-//     var div = document.getElementsByClassName('toggle-con');
-//     for (var i = 0; i < div.length; i ++) {
-//         div[i].style.visibility = 'visible';
-//     }
-// }
 function toggleConShow() {
     var div = document.getElementsByClassName('toggle-con');
     for (var i = 0; i < div.length; i ++) {
@@ -1001,15 +995,8 @@ function toggleConShow() {
 }
 
 /**
- * toggles the control buttons off when the player ends their turn
+ * toggles the control buttons off
  */
-// function toggleConHide() {
-//     var div = document.getElementsByClassName('toggle-con');
-//     for (var i = 0; i < div.length; i ++) {
-//         div[i].style.visibility = 'hidden';
-//     }
-// }
-
 function toggleConHide() {
     var div = document.getElementsByClassName('toggle-con');
     for (var i = 0; i < div.length; i ++) {
@@ -1018,15 +1005,8 @@ function toggleConHide() {
 }
 
 /**
- * shows the double button when it can be played
+ * toggles the double button on when it can be played
  */
-// function toggleDoubleShow() {
-//     var div = document.getElementsByClassName('double');
-//     for (var i = 0; i < div.length; i ++) {
-//         div[i].style.visibility = 'visible';
-//     }
-// }
-
 function toggleDoubleShow() {
     var div = document.getElementsByClassName('double');
     for (var i = 0; i < div.length; i ++) {
@@ -1034,15 +1014,6 @@ function toggleDoubleShow() {
     }
 }
 
-/**
- * hides the double button when it cannot be played
- */
-// function toggleDoubleHide() {
-//     var div = document.getElementsByClassName('double');
-//     for (var i = 0; i < div.length; i ++) {
-//         div[i].style.visibility = 'hidden';
-//     }
-// }
 
 /**
  * hides the double button when it cannot be played
@@ -1057,13 +1028,6 @@ function toggleDoubleHide() {
 /**
  * shows the split button when it can be played
 //  */
-// function toggleSplitShow() {
-//     var div = document.getElementsByClassName('split');
-//     for (var i = 0; i < div.length; i ++) {
-//         div[i].style.visibility = 'visible';
-//     }
-// }
-
 function toggleSplitShow() {
     var div = document.getElementsByClassName('split');
     for (var i = 0; i < div.length; i ++) {
@@ -1074,13 +1038,6 @@ function toggleSplitShow() {
 /**
  * hides the split button when it cannot be played
  */
-// function toggleSplitHide() {
-//     var div = document.getElementsByClassName('split');
-//     for (var i = 0; i < div.length; i ++) {
-//         div[i].style.visibility = 'hidden';
-//     }
-// }
-
 function toggleSplitHide() {
     var div = document.getElementsByClassName('split');
     for (var i = 0; i < div.length; i ++) {
@@ -1119,13 +1076,6 @@ function toggleSplitRevert() {
 /**
  * shows the new game button when it can be played
  */
-// function toggleNewGameShow() {
-//     var div = document.getElementsByClassName('new-game');
-//     for (var i = 0; i < div.length; i ++) {
-//         div[i].style.visibility = 'visible';
-//     }
-// }
-
 function toggleNewGameShow() {
     var div = document.getElementsByClassName('new-game');
     for (var i = 0; i < div.length; i ++) {
@@ -1136,13 +1086,6 @@ function toggleNewGameShow() {
 /**
  * hides the new game button when it cannot be played
  */
-// function toggleNewGameHide() {
-//     var div = document.getElementsByClassName('new-game');
-//     for (var i = 0; i < div.length; i ++) {
-//         div[i].style.visibility = 'hidden';
-//     }
-// }
-
 function toggleNewGameHide() {
     var div = document.getElementsByClassName('new-game');
     for (var i = 0; i < div.length; i ++) {
@@ -1168,4 +1111,20 @@ function toggleSplitConHide() {
     for (var i = 0; i < div.length; i ++) {
         div[i].style.display = 'none';
     }
+}
+
+/**
+ * shows the hit/stand buttons when a split game is played
+ */
+function toggleSplitTrackerShow() {
+    var div = document.getElementById('tracker-split');
+    div.style.display = 'block';
+}
+
+/**
+ * shows the hit/stand buttons when a split game is played
+ */
+function toggleSplitTrackerHide() {
+    var div = document.getElementById('tracker-split');
+    div.style.display = 'none';
 }
