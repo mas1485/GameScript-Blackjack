@@ -81,7 +81,7 @@ Yes, I tested the game. Fairly obvious if you want to look at the commit history
 I also put my site through the validator see below. 
 The *warnings* in JS are about extensions but the code runs fine and no issues with syntax or functions.
 
-I am not aware of any unfixed bugs.
+I am not aware of any unfixed bugs. js checker added as pdf due to being too large for screenshot, click it to see it or run it yourself.
 
 ![Validator checked no errors](assets/images/htmlchecker.png)
 ![Validator checked no errors](assets/images/htmlchecker_blackjack.png)
@@ -89,8 +89,8 @@ I am not aware of any unfixed bugs.
 ![Validator checked no errors](assets/images/htmlchecker_inprogress.png)
 ![Validator checked no errors](assets/images/lighthouse.png)
 ![Validator checked no errors](assets/images/csschecker.png)
-![Validator checked no errors](assets/images/jschecker_script.png)
-![Validator checked no errors](assets/images/jschecker.png)
+![Validator checked no errors](assets/images/jschecker_script.pdf)
+![Validator checked no errors](assets/images/jschecker.pdf)
 
 ##Deployment
 
