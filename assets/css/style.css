@@ -130,9 +130,6 @@ div#home {
 
 li {
     transition: all 0.5s;
-}
-
-li h2 {
     padding: 15px;
 }
 

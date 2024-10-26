@@ -21,17 +21,17 @@
         <!-- Hidden Navlinks -->
         <nav>
             <ul id="menu">
-                <li><a href="index.html"><h2>GameScript</h2></a></li>
-                <li><a href="contact.html"><h2>Contact</h2></a></li>
+                <li><a href="index.html">GameScript</a></li>
+                <li><a href="contact.html">Contact</a></li>
                 <li class="dropdown active">
-                    <button class="dropbtn"><h2>Games</h2>
+                    <button class="dropbtn">Games
                         <i class="fa fa-caret-down"></i>
                     </button>
                     <ul class="dropdown-content">
-                        <li><a href="blackjack.html" class="active-dropdown"><h2>Blackjack</h2></a></li>
-                        <li><a href="poker.html"><h2>Poker</h2></a></li>
-                        <li><a href="roulette.html"><h2>Roulette</h2></a></li>
-                    </div>
+                        <li><a href="blackjack.html" class="active-dropdown">Blackjack</a></li>
+                        <li><a href="poker.html">Poker</a></li>
+                        <li><a href="roulette.html">Roulette</a></li>
+                    </ul>
                 </li>
             </ul>
         </nav>
@@ -52,66 +52,36 @@
                 </div>
             </div>
             <div id="control-area" class="toggle-con">
-                <button data-type="hit" class="btn btn-con">
-                    <h4>hit</h4>
-                </button>
-                <button data-type="stand" class="btn btn-con">
-                    <h4>stand</h4>
-                </button>
-                <button data-type="double" class="btn btn-con double">
-                    <h4>double</h4>
-                    <h5 id ="double-cost"></h5>
-                </button>
-                <button data-type="split" class="btn btn-con split">
-                    <h4>split</h4>
-                    <h5 id ="split-cost"></h5>
-                </button>
-                <button data-type="split-hit" class="btn btn-con toggle-con-split">
-                    <h4>hit</h4>
-                </button>
+                <button data-type="hit" class="btn btn-con">hit</button>
+                <button data-type="stand" class="btn btn-con">stand</button>
+                <button data-type="double" class="btn btn-con double">double<span id="double-cost"></span></button>
+                <button data-type="split" class="btn btn-con split">split<span id ="split-cost"></span></button>
+                <button data-type="split-hit" class="btn btn-con toggle-con-split">hit</h4></button>
             </div>
             <div class ="player-area">
                 <div class ="player-area-one">
-                    <div id="player">
-                    </div>
-                    <div id="tracker-player">
-                    </div>
+                    <div id="player"></div>
+                    <div id="tracker-player"></div>
                 </div>
                 <div class ="player-area-two">
-                    <div id="player-split">
-                    </div>
-                    <div id="tracker-split">
-                    </div>
+                    <div id="player-split"></div>
+                    <div id="tracker-split"></div>
                 </div>
             </div>
             <div class="toggle-bet">
-                <button data-type="lock-bet" class="btn btn-con">
-                    <h4>draw cards</h4>
-                </button>
+                <button data-type="lock-bet" class="btn btn-con">draw cards</button>
             </div>
             <div>
-                <button data-type="new-game" class="btn btn-con new-game">
-                    <h4>new game</h4>
-                </button>
+                <button data-type="new-game" class="btn btn-con new-game">new game</button>
             </div>
         </div>
         <div id="score-area">
             <div>
-                <button data-type="bet10" class="btn btn-chip btn-red">
-                    <h5>10</h5>
-                </button>
-                <button data-type="bet50" class="btn btn-chip btn-blue">
-                    <h5>50</h5>
-                </button>
-                <button data-type="bet100"  class="btn btn-chip btn-green">
-                    <h5>100</h5>
-                </button>
-                <button data-type="bet500"  class="btn btn-chip btn-purple">
-                    <h5>500</h5>
-                </button>
-                <button data-type="bet1000"  class="btn btn-chip btn-black">
-                    <h5>1000</h5>
-                </button>
+                <button data-type="bet10" class="btn btn-chip btn-red">10</button>
+                <button data-type="bet50" class="btn btn-chip btn-blue">50</button>
+                <button data-type="bet100"  class="btn btn-chip btn-green">100</button>
+                <button data-type="bet500"  class="btn btn-chip btn-purple">500</button>
+                <button data-type="bet1000"  class="btn btn-chip btn-black">1000</button>
             </div>
             <div>
                 <span id="score"></span>
