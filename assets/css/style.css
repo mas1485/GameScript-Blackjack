@@ -302,6 +302,26 @@ li:hover {
     color: black;
 }
 
+i.clubs, i.diamonds, i.hearts, i.spades {
+    font-style: normal;
+}
+
+.spades::after{
+    content: '♠';
+}
+
+.hearts::after{
+    content: '♥';
+}
+
+.diamonds::after{
+    content: '♦';
+}
+
+.clubs::after{
+    content: '♣';
+}
+
 /* Buttons */
 .btn h4 , .btn h5 {
     color: #2f2f31;

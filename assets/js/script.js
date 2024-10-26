@@ -674,34 +674,6 @@ function dealCards(hand, idString) {
 }
 
 /**
- * styles the cards by adding content based on suit
- */
-// function styleCards() {
-//     var hearts = document.getElementsByClassName("hearts").innerHTML;
-//     hearts.appendChild() = document.createElement("IMG").src;
-//     console.log(hearts)
-
-//     var diamonds = document.getElementsByClassName("diamonds");
-//     diamonds.appendChild() = document.createElement("IMG").src;
-
-//     var spades = document.getElementsByClassName('spades').innerHTML;
-//     spades.appendChild() = document.createElement("IMG").src;
-
-//     var clubs = document.getElementsByClassName('clubs');
-//     clubs.appendChild() = document.createElement("IMG").src;
-// }
-
-// function styleCards() {
-//     let hearts = document.getElementsByClassName("hearts");
-//     heartsIMG = hearts;
-//     heartsIMG = document.createElement('img');
-//     document.getElementById("hearts-img").src ="test.png";
-//     document.getElementById("diamonds-img").src ="test.png";
-//     document.getElementById("spades-img").src ="test.png";    
-//     document.getElementById("clubs-img").src ="test.png";
-// }
-
-/**
  * treats the dealer card as if "face-down"
  */
 function hideDealerCard () {
