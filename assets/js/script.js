@@ -428,7 +428,7 @@ const resetDeck = [
         frontend: "K",
         id: "52"
     },
-]
+];
 
 let playerTurn = false;
 let dealerTurn = false;
@@ -518,7 +518,7 @@ document.addEventListener("DOMContentLoaded", function() {
     toggleSplitRevert();
     updateScore();
 
-})
+});
 
 /**
  * Toggle between showing and hiding the navigation menu links when the user clicks on the hamburger menu or bar icon
@@ -1065,11 +1065,11 @@ function toggleSplitNone() {
 function toggleSplitRevert() {
     var double = document.getElementsByClassName('double');
     var split = document.getElementsByClassName('split');
-    for (var i = 0; i < double.length; i ++) {
-        double[i].style.display = "";
+    for (var allDouble = 0; allDouble < double.length; allDouble ++) {
+        double[allDouble].style.display = "";
     }
-    for (var i = 0; i < split.length; i ++) {
-        split[i].style.display = "";
+    for (var allSplit = 0; allSplit < split.length; allSplit ++) {
+        split[allSplit].style.display = "";
     }
 }
 
